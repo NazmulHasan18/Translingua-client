@@ -18,8 +18,8 @@ const Login = () => {
             <div className="text-center lg:text-left">
                <h1 className="text-5xl font-bold my-8">Login now!</h1>
             </div>
-            <div className="card flex-shrink-0 w-full min-w-[350px] lg:max-w-lg shadow-2xl bg-base-100 text-xl">
-               <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+               <div className="card flex-shrink-0 w-[350px] lg:w-[512px] shadow-2xl bg-base-100 text-xl">
                   <div className="card-body">
                      <div className="form-control">
                         <label className="label">
@@ -47,9 +47,20 @@ const Login = () => {
                            type="password"
                            placeholder="Password"
                            className="input input-bordered rounded-full"
-                           {...register("password", { required: true })}
+                           {...register("password", {
+                              required: true,
+                              pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                           })}
                         />
-                        {errors.email && <span className="text-red-500 text-base">Enter Your Password</span>}
+                        {errors.password && errors.password.type === "required" && (
+                           <span className="text-red-500 text-base">Password is required.</span>
+                        )}
+                        {errors.password && errors.password.type === "pattern" && (
+                           <span className="text-red-500 text-base">
+                              Password must be at least 8 characters long. Password must contain at least one
+                              capital letter and one special character.
+                           </span>
+                        )}
                         <label className="label">
                            <a href="#" className="label-text-alt link link-hover">
                               Forgot password?
@@ -62,8 +73,8 @@ const Login = () => {
                         </button>
                      </div>
                   </div>
-               </form>
-            </div>
+               </div>
+            </form>
          </div>
       </div>
    );
