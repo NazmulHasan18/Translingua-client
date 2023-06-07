@@ -6,9 +6,8 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-   {
-      /* */
-   }
+   const [toggle, setToggle] = useState(false);
+   const [setting, setSetting] = useState(false);
 
    const navs = (
       <>
@@ -22,6 +21,12 @@ const Navbar = () => {
                Instructors
             </NavLink>
          </li>
+         <li>
+            <NavLink to="/login" className={({ isActive }) => (isActive ? "text-yellow-400" : "")}>
+               Login
+            </NavLink>
+         </li>
+
          {/* <li tabIndex={0}>
             <details>
                <summary>Parent</summary>
@@ -35,14 +40,8 @@ const Navbar = () => {
                </ul>
             </details>
          </li> */}
-         <li>
-            <a>Classes</a>
-         </li>
       </>
    );
-
-   const [toggle, setToggle] = useState(false);
-   const [setting, setSetting] = useState(false);
 
    useEffect(() => {
       themeChange(false);
@@ -51,8 +50,8 @@ const Navbar = () => {
    return (
       <div>
          <div className="navbar bg-black bg-opacity-50 text-white z-30 text-xl font-semibold fixed max-w-screen-2xl">
-            <div className="navbar-start">
-               <div className="dropdown">
+            <div className="navbar-start flex-grow">
+               <div className="dropdown text-black">
                   <label tabIndex={0} className="btn btn-circle swap swap-rotate lg:hidden">
                      {/* this hidden checkbox controls the state */}
                      <input type="checkbox" onClick={() => setToggle(!toggle)} />
@@ -90,15 +89,15 @@ const Navbar = () => {
                </div>
                <a className="btn btn-ghost text-2xl">Translingua</a>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-end hidden lg:flex">
                <ul className="menu menu-horizontal px-1">{navs}</ul>
             </div>
-            <div className="navbar-end">
+            <div>
                <details className="dropdown dropdown-end">
                   <summary className="btn btn-ghost text-xl" onClick={() => setSetting(!setting)}>
                      <AiFillSetting className={`${setting && "rotate-45"}`}></AiFillSetting>
                   </summary>
-                  <ul className="p-2 shadow menu dropdown-content bg-black text-white rounded-box w-52">
+                  <ul className="p-2 shadow menu dropdown-content bg-white text-black rounded-box w-52">
                      <li>
                         <label>
                            {/* !TODO: Theme is not working */}
