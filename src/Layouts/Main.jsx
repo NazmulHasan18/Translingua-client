@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 const Main = () => {
    const location = useLocation().pathname;
-   console.log(location);
    const [hide, setHide] = useState(false);
 
    useEffect(() => {

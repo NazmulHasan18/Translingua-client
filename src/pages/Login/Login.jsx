@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Login = () => {
    const {
@@ -71,6 +72,15 @@ const Login = () => {
                         <button type="submit" className="btn bg-[#ffb038] hover:bg-[#ffbe5d] rounded-full">
                            Login
                         </button>
+                     </div>
+                     <div>
+                        <p className="text-lg font-semibold">
+                           New here?{" "}
+                           <Link to="/register" className="text-[#ff9a04] hover:underline">
+                              {" "}
+                              Register Now!
+                           </Link>
+                        </p>
                      </div>
                   </div>
                </div>
