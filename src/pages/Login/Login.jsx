@@ -3,9 +3,23 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import ResetModal from "./ResetModal";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Login = () => {
-   const { emailPassSignIn, resetPassword } = useAuth();
+   const [showPass, setShowPass] = useState(false);
+   const { emailPassSignIn } = useAuth();
+   const [modalOpen, setModalOpen] = useState(false);
+
+   const openModal = () => {
+      setModalOpen(true);
+   };
+
+   const closeModal = () => {
+      setModalOpen(false);
+   };
    const {
       register,
       handleSubmit,
@@ -35,10 +49,6 @@ const Login = () => {
             toast.error(error.message);
          });
    };
-   //    password reset functionality
-   const handelResetPassword = (data) => {
-      console.log("modal working", data);
-   };
 
    // https://i.ibb.co/6Hwv8zd/Contact-1.png
    return (
@@ -50,8 +60,8 @@ const Login = () => {
             <div className="text-center lg:text-left">
                <h1 className="text-5xl font-bold my-8">Login now!</h1>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-               <div className="card flex-shrink-0 w-[350px] lg:w-[512px] shadow-2xl bg-base-100 text-xl">
+            <div className="card flex-shrink-0 w-[350px] lg:w-[512px] shadow-2xl bg-base-100 text-xl">
+               <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="card-body">
                      <div className="form-control">
                         <label className="label">
@@ -69,14 +79,14 @@ const Login = () => {
                            <span className="text-red-500 text-base">Enter Your Email First</span>
                         )}
                      </div>
-                     <div className="form-control">
+                     <div className="form-control relative">
                         <label className="label">
                            <span className="label-text">
                               Password<span className="text-red-500 text-base">*</span>
                            </span>
                         </label>
                         <input
-                           type="password"
+                           type={`${showPass ? "text" : "password"}`}
                            placeholder="Password"
                            className="input input-bordered rounded-full"
                            {...register("password", {
@@ -84,6 +94,14 @@ const Login = () => {
                               pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                            })}
                         />
+
+                        <p
+                           className="absolute top-1/2 right-5 opacity-50 cursor-pointer"
+                           onClick={() => setShowPass(!showPass)}
+                        >
+                           {showPass ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+                        </p>
+
                         {errors.password && errors.password.type === "required" && (
                            <span className="text-red-500 text-base">Password is required.</span>
                         )}
@@ -96,7 +114,10 @@ const Login = () => {
                         <label className="label">
                            <button
                               className="label-text-alt link link-hover"
-                              onClick={handleSubmit(handelResetPassword)}
+                              onClick={(e) => {
+                                 e.preventDefault();
+                                 openModal();
+                              }}
                            >
                               Forgot password?
                            </button>
@@ -117,9 +138,11 @@ const Login = () => {
                         </p>
                      </div>
                   </div>
-               </div>
-            </form>
+               </form>
+               <SocialLogin></SocialLogin>
+            </div>
          </div>
+         <ResetModal isOpen={modalOpen} closeModal={closeModal}></ResetModal>
       </div>
    );
 };

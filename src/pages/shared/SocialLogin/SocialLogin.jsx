@@ -1,0 +1,46 @@
+import { FaGoogle } from "react-icons/fa";
+import useAuth from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const SocialLogin = () => {
+   const { googleLogin } = useAuth();
+
+   const location = useLocation();
+   const from = location.state?.pathname || "/";
+   console.log(from);
+   const navigate = useNavigate();
+
+   const handelGoogleLogin = () => {
+      googleLogin()
+         .then((result) => {
+            const user = result.user;
+            Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: `${user?.displayName} Log In Successful`,
+               showConfirmButton: false,
+               timer: 1000,
+            });
+            navigate(from);
+         })
+         .catch((error) => {
+            toast.error(error.message);
+         });
+   };
+   return (
+      <div>
+         <div className="divider mx-5">
+            <span className="text-lg font-mont">OR</span>
+         </div>
+         <div className="mx-auto w-5/6 mb-10 mt-4">
+            <button className="btn w-full rounded-full btn-primary" onClick={handelGoogleLogin}>
+               <FaGoogle className=" text-xl"></FaGoogle> Sign Up With Google
+            </button>
+         </div>
+      </div>
+   );
+};
+
+export default SocialLogin;
