@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Register = () => {
+   const { emailPassSignUp, updateUser } = useAuth();
    const [err, setErr] = useState("");
+   const location = useLocation();
+   const from = location.state?.pathname || "/";
+   const navigate = useNavigate();
 
    const {
       register,
@@ -17,7 +24,29 @@ const Register = () => {
          errors.confirm_password = true;
          return;
       }
-      console.log(data);
+      emailPassSignUp(data.email, data.password)
+         .then((userCredential) => {
+            const loggedUser = userCredential.user;
+            if (loggedUser) {
+               updateUser(data.name, data.user_image)
+                  .then(() => {
+                     Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${loggedUser.displayName} Register Successful`,
+                        showConfirmButton: false,
+                        timer: 1000,
+                     });
+                     navigate(from);
+                  })
+                  .catch((error) => {
+                     toast.error(error.message);
+                  });
+            }
+         })
+         .catch((error) => {
+            toast.error(error.message);
+         });
    };
 
    return (
@@ -121,22 +150,25 @@ const Register = () => {
                      </div>
                      {/* Photo URL and Gender */}
                      <div className="flex flex-col lg:flex-row gap-5">
-                        <div className="form-control lg:w-1/2">
+                        <div className="form-control w-full mx-auto lg:w-1/2">
                            <label className="label">
                               <span className="label-text">
-                                 Photo URL<span className="text-red-500 text-base">*</span>
+                                 Phone Number<span className="text-red-500 text-base">*</span>
                               </span>
                            </label>
                            <input
                               type="text"
-                              placeholder="Your Photo URL"
+                              placeholder="Your Number"
                               className="input-warning input input-bordered rounded-full"
-                              {...register("user_image", {
+                              {...register("number", {
+                                 pattern: /^\d{11}$/,
                                  required: true,
                               })}
                            />
-                           {errors.user_image && (
-                              <span className="text-red-500 text-base">Please Provide Your Image URL!</span>
+                           {errors.number && (
+                              <span className="text-red-500 text-base">
+                                 Please Provide A valid 11 digit Number!
+                              </span>
                            )}
                         </div>
 
@@ -163,25 +195,22 @@ const Register = () => {
                            )}
                         </div>
                      </div>
-                     <div className="form-control w-full mx-auto">
+                     <div className="form-control w-full">
                         <label className="label">
                            <span className="label-text">
-                              Number<span className="text-red-500 text-base">*</span>
+                              Photo URL<span className="text-red-500 text-base">*</span>
                            </span>
                         </label>
                         <input
                            type="text"
-                           placeholder="Your Number"
+                           placeholder="Your Photo URL"
                            className="input-warning input input-bordered rounded-full"
-                           {...register("number", {
-                              pattern: /^\d{11}$/,
+                           {...register("user_image", {
                               required: true,
                            })}
                         />
-                        {errors.number && (
-                           <span className="text-red-500 text-base">
-                              Please Provide A valid 11 digit Number!
-                           </span>
+                        {errors.user_image && (
+                           <span className="text-red-500 text-base">Please Provide Your Image URL!</span>
                         )}
                      </div>
                      <div className="form-control mt-6 w-1/2 mx-auto">
@@ -189,9 +218,12 @@ const Register = () => {
                            Register
                         </button>
                      </div>
-                     <div>
+                     <div className="my-5 text-base font-semibold">
                         <p>
-                           Already Have an Account? <Link to="/login">Login Now!</Link>
+                           Already Have an Account?{" "}
+                           <Link to="/login" className="text-[#ff9a04] hover:underline">
+                              Login Now!
+                           </Link>
                         </p>
                      </div>
                   </div>

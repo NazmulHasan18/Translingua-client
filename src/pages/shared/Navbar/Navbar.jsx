@@ -4,10 +4,30 @@ import { AiFillSetting } from "react-icons/ai";
 import Toggle from "react-toggle";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+   const { user, logOut } = useAuth();
    const [toggle, setToggle] = useState(false);
    const [setting, setSetting] = useState(false);
+
+   const handelLogOut = () => {
+      logOut()
+         .then(() => {
+            Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: "User Log Out Successful",
+               showConfirmButton: false,
+               timer: 1000,
+            });
+         })
+         .catch((error) => {
+            toast.error(error.message);
+         });
+   };
 
    const navs = (
       <>
@@ -21,11 +41,28 @@ const Navbar = () => {
                Instructors
             </NavLink>
          </li>
-         <li>
-            <NavLink to="/login" className={({ isActive }) => (isActive ? "text-yellow-400" : "")}>
-               Login
-            </NavLink>
-         </li>
+         {user ? (
+            <>
+               <li>
+                  <NavLink
+                     to="/profile"
+                     className={({ isActive }) => (isActive ? "ring ring-warning ring-offset-base-100" : "")}
+                  >
+                     <div className="avatar">
+                        <div className="w-12 rounded-full ring-offset-2">
+                           <img src={user.photoURL} />
+                        </div>
+                     </div>
+                  </NavLink>
+               </li>
+            </>
+         ) : (
+            <li>
+               <NavLink to="/login" className={({ isActive }) => (isActive ? "text-yellow-400" : "")}>
+                  Login
+               </NavLink>
+            </li>
+         )}
 
          {/* <li tabIndex={0}>
             <details>
@@ -90,7 +127,7 @@ const Navbar = () => {
                <a className="btn btn-ghost text-2xl">Translingua</a>
             </div>
             <div className="navbar-end hidden lg:flex">
-               <ul className="menu menu-horizontal px-1">{navs}</ul>
+               <ul className="menu menu-horizontal px-1 items-center">{navs}</ul>
             </div>
             <div>
                <details className="dropdown dropdown-end">
@@ -113,9 +150,16 @@ const Navbar = () => {
                            <span>Theme</span>
                         </label>
                      </li>
-                     <li>
-                        <a>Item 2</a>
-                     </li>
+                     {user && (
+                        <li>
+                           <button
+                              className="btn btn-sm text-white bg-[#ffb038] hover:bg-[#ffbe5d] rounded-full"
+                              onClick={handelLogOut}
+                           >
+                              Log Out
+                           </button>
+                        </li>
+                     )}
                   </ul>
                </details>
             </div>

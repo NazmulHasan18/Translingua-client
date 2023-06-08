@@ -16,7 +16,10 @@ export const AuthContext = createContext();
 
 const auth = getAuth(app);
 
+// component Auth Provider Here
+
 const AuthProvider = ({ children }) => {
+   const [loading, setLoading] = useState(true);
    const [user, setUser] = useState(null);
 
    //    google login
@@ -60,13 +63,16 @@ const AuthProvider = ({ children }) => {
    useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
          setUser(loggedUser);
+         setLoading(false);
       });
-      return unsubscribe();
+      return () => unsubscribe();
    }, []);
 
    //    All are exporting from here
    const authContext = {
       user,
+      loading,
+      setLoading,
       googleLogin,
       emailPassSignUp,
       emailPassSignIn,

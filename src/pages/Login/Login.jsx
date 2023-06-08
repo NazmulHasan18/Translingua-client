@@ -1,13 +1,44 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Login = () => {
+   const { emailPassSignIn, resetPassword } = useAuth();
    const {
       register,
       handleSubmit,
       formState: { errors },
    } = useForm();
-   const onSubmit = (data) => console.log(data);
+
+   const location = useLocation();
+   const from = location.state?.pathname || "/";
+   const navigate = useNavigate();
+
+   //    here the sign in function
+   const onSubmit = (data) => {
+      emailPassSignIn(data.email, data.password)
+         .then((userCredential) => {
+            const loggedUser = userCredential.user;
+
+            Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: `${loggedUser?.displayName} Log In Successful`,
+               showConfirmButton: false,
+               timer: 1000,
+            });
+            navigate(from);
+         })
+         .catch((error) => {
+            toast.error(error.message);
+         });
+   };
+   //    password reset functionality
+   const handelResetPassword = (data) => {
+      console.log("modal working", data);
+   };
 
    // https://i.ibb.co/6Hwv8zd/Contact-1.png
    return (
@@ -63,9 +94,12 @@ const Login = () => {
                            </span>
                         )}
                         <label className="label">
-                           <a href="#" className="label-text-alt link link-hover">
+                           <button
+                              className="label-text-alt link link-hover"
+                              onClick={handleSubmit(handelResetPassword)}
+                           >
                               Forgot password?
-                           </a>
+                           </button>
                         </label>
                      </div>
                      <div className="form-control mt-6">
