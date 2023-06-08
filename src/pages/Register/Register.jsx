@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Register = () => {
    const [err, setErr] = useState("");
@@ -11,12 +12,12 @@ const Register = () => {
    } = useForm();
    const onSubmit = (data) => {
       setErr("");
-      console.log(data);
       if (data.password !== data.confirm_password) {
          setErr("Password Does not match");
          errors.confirm_password = true;
          return;
       }
+      console.log(data);
    };
 
    return (
@@ -39,7 +40,7 @@ const Register = () => {
                            <input
                               type="text"
                               placeholder="Your Name"
-                              className="input-secondary input input-bordered rounded-full"
+                              className="input-warning input input-bordered rounded-full"
                               {...register("name", { required: true })}
                            />
                            {errors.email && (
@@ -55,7 +56,7 @@ const Register = () => {
                            <input
                               type="text"
                               placeholder="Your Email"
-                              className="input-secondary input input-bordered rounded-full"
+                              className="input-warning input input-bordered rounded-full"
                               {...register("email", { required: true })}
                            />
                            {errors.email && (
@@ -74,7 +75,7 @@ const Register = () => {
                            <input
                               type="password"
                               placeholder="Your Password"
-                              className="input-secondary input input-bordered rounded-full"
+                              className="input-warning input input-bordered rounded-full"
                               {...register("password", {
                                  required: true,
                                  pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -100,7 +101,7 @@ const Register = () => {
                            <input
                               type="password"
                               placeholder="Confirm Password"
-                              className="input-secondary input input-bordered rounded-full"
+                              className="input-warning input input-bordered rounded-full"
                               {...register("confirm_password", {
                                  required: true,
                                  pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -129,7 +130,7 @@ const Register = () => {
                            <input
                               type="text"
                               placeholder="Your Photo URL"
-                              className="input-secondary input input-bordered rounded-full"
+                              className="input-warning input input-bordered rounded-full"
                               {...register("user_image", {
                                  required: true,
                               })}
@@ -147,7 +148,7 @@ const Register = () => {
                            </label>
                            <select
                               required
-                              className="select select-secondary w-full rounded-full"
+                              className="select select-warning w-full rounded-full"
                               {...register("gender")}
                            >
                               <option disabled value="" selected>
@@ -162,28 +163,36 @@ const Register = () => {
                            )}
                         </div>
                      </div>
-                     <div className="form-control w-full lg:w-1/2 mx-auto">
+                     <div className="form-control w-full mx-auto">
                         <label className="label">
                            <span className="label-text">
                               Number<span className="text-red-500 text-base">*</span>
                            </span>
                         </label>
                         <input
-                           type="number"
+                           type="text"
                            placeholder="Your Number"
-                           className="input-secondary input input-bordered rounded-full"
+                           className="input-warning input input-bordered rounded-full"
                            {...register("number", {
+                              pattern: /^\d{11}$/,
                               required: true,
                            })}
                         />
                         {errors.number && (
-                           <span className="text-red-500 text-base">Please Provide Your Number!</span>
+                           <span className="text-red-500 text-base">
+                              Please Provide A valid 11 digit Number!
+                           </span>
                         )}
                      </div>
                      <div className="form-control mt-6 w-1/2 mx-auto">
                         <button type="submit" className="btn bg-[#ffb038] hover:bg-[#ffbe5d] rounded-full">
                            Register
                         </button>
+                     </div>
+                     <div>
+                        <p>
+                           Already Have an Account? <Link to="/login">Login Now!</Link>
+                        </p>
                      </div>
                   </div>
                </div>
