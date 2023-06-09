@@ -9,11 +9,17 @@ import { router } from "./routes/Route";
 import AuthProvider from "./providers/AuthProvider";
 import { ToastContainer } from "react-toastify";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
    <React.StrictMode>
-      <AuthProvider>
-         <RouterProvider router={router} />
-         <ToastContainer />
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+         <AuthProvider>
+            <RouterProvider router={router} />
+            <ToastContainer />
+         </AuthProvider>
+      </QueryClientProvider>
    </React.StrictMode>
 );
