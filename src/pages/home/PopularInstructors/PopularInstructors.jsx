@@ -31,7 +31,7 @@ const PopularInstructors = () => {
          </div>
          <div className="text-center my-8">
             <Link to="/instructors">
-               <button className="btn bg-orange-600 btn-xs text-base sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold text-base-100 ">
+               <button className="btn btn-outline text-orange-600 btn-xs md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold md:bottom-[20%] md:left-24">
                   All Instructors <FaArrowRight className="text-xl"></FaArrowRight>
                </button>
             </Link>

@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import instructorImg from "../../../assets/Nazmul Hasan.jpg";
+import { Link } from "react-router-dom";
 
 const InstructorCard = ({ instructor, index }) => {
    return (
       <div>
-         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-            <div className="hero bg-[#fff1e2]">
+         <motion.div whileHover={{ scale: 1.1 }}>
+            <div className="hero h-[380px] bg-[#fff1e2]">
                <div
                   className={`${
                      index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
@@ -21,9 +22,11 @@ const InstructorCard = ({ instructor, index }) => {
                      </p>
                      <p className="text-lg text-red-600 font-bold">Price: ${instructor.price}</p>
 
-                     <button className="btn bg-orange-600  btn-xs text-base sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold text-base-100 ">
-                        Details &gt;
-                     </button>
+                     <Link to={`/instructor/${instructor._id}`}>
+                        <button className="btn bg-orange-600  btn-xs text-base sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold text-base-100 ">
+                           Details &gt;
+                        </button>
+                     </Link>
                   </div>
                </div>
             </div>

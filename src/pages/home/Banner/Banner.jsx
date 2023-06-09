@@ -22,7 +22,7 @@ const Banner = () => {
                      alt=""
                      className="w-[1550px]"
                   />
-                  <button className="btn bg-orange-600  btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold text-base-100 absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
+                  <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
                      Enroll Now!
                   </button>
                </div>
@@ -34,7 +34,7 @@ const Banner = () => {
                      alt=""
                      className="w-[1550px]"
                   />
-                  <button className="btn bg-orange-600  btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold text-base-100 absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
+                  <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
                      Enroll Now!
                   </button>
                </div>
@@ -46,7 +46,7 @@ const Banner = () => {
                      alt=""
                      className="w-[1550px]"
                   />
-                  <button className="btn bg-orange-600  btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold text-base-100 absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
+                  <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
                      Enroll Now!
                   </button>
                </div>
