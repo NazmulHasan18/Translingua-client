@@ -50,7 +50,7 @@ const Navbar = () => {
                   >
                      <div className="avatar">
                         <div className="w-12 rounded-full ring-offset-2">
-                           <img src={user.photoURL} />
+                           <img src={user.photoURL} title={user?.displayName} />
                         </div>
                      </div>
                   </NavLink>

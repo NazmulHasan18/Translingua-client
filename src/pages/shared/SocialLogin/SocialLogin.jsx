@@ -30,11 +30,11 @@ const SocialLogin = () => {
          });
    };
    return (
-      <div>
+      <div className="w-full">
          <div className="divider mx-5">
             <span className="text-lg font-mont">OR</span>
          </div>
-         <div className="mx-auto w-5/6 mb-10 mt-4">
+         <div className="mx-auto w-64 mb-10 mt-4">
             <button className="btn w-full rounded-full btn-primary" onClick={handelGoogleLogin}>
                <FaGoogle className=" text-xl"></FaGoogle> Sign Up With Google
             </button>

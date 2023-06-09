@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Register = () => {
    const { emailPassSignUp, updateUser } = useAuth();
@@ -218,7 +219,7 @@ const Register = () => {
                            Register
                         </button>
                      </div>
-                     <div className="my-5 text-base font-semibold">
+                     <div className="mt-5 text-base font-semibold">
                         <p>
                            Already Have an Account?{" "}
                            <Link to="/login" className="text-[#ff9a04] hover:underline">
@@ -229,6 +230,7 @@ const Register = () => {
                   </div>
                </div>
             </form>
+            <SocialLogin></SocialLogin>
          </div>
       </div>
    );
