@@ -4,6 +4,8 @@ import moment from "moment/moment";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchQuotes } from "../../../API/api";
+import { Fade } from "react-awesome-reveal";
+import PopularInstructors from "../PopularInstructors/PopularInstructors";
 
 const Home = () => {
    const [time, setTime] = useState();
@@ -34,7 +36,12 @@ const Home = () => {
                </p>
             </Marquee>
          </div>
-         <h2 className="font-exo text-4xl uppercase font-bold">This is home</h2>
+         <PopularInstructors></PopularInstructors>
+         <h2 className="font-exo text-4xl uppercase font-bold" id="title">
+            <Fade delay={100} cascade>
+               I am an animated text
+            </Fade>
+         </h2>
       </div>
    );
 };

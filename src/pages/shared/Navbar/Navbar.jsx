@@ -44,6 +44,12 @@ const Navbar = () => {
          {user ? (
             <>
                <li>
+                  <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-yellow-400" : "")}>
+                     Dashboard
+                  </NavLink>
+               </li>
+
+               <li>
                   <NavLink
                      to="/profile"
                      className={({ isActive }) => (isActive ? "ring ring-warning ring-offset-base-100" : "")}
