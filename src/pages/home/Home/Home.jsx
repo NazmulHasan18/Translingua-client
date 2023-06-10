@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { fetchQuotes } from "../../../API/api";
 import { Fade } from "react-awesome-reveal";
 import PopularInstructors from "../PopularInstructors/PopularInstructors";
+import PopularClasses from "../PopularClasses/PopularClasses";
 
 const Home = () => {
    const [time, setTime] = useState();
@@ -36,6 +37,7 @@ const Home = () => {
                </p>
             </Marquee>
          </div>
+         <PopularClasses></PopularClasses>
          <PopularInstructors></PopularInstructors>
          <h2 className="font-exo text-4xl uppercase font-bold" id="title">
             <Fade delay={100} cascade>

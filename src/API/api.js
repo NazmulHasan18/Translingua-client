@@ -18,3 +18,11 @@ export const fetchInstructorById = async (id) => {
    const res = await api.get(`/instructor/${id}`);
    return res.data;
 };
+export const fetchClasses = async () => {
+   const res = await api.get("/classes");
+   return res.data;
+};
+export const fetchPopularClasses = async () => {
+   const res = await api.get("/popular_classes");
+   return res.data;
+};

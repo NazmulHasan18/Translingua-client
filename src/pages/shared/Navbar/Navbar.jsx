@@ -41,6 +41,11 @@ const Navbar = () => {
                Instructors
             </NavLink>
          </li>
+         <li>
+            <NavLink to="/classes" className={({ isActive }) => (isActive ? "text-yellow-400" : "")}>
+               Classes
+            </NavLink>
+         </li>
          {user ? (
             <>
                <li>
