@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { fetchInstructors } from "../../../API/api";
-import { useEffect } from "react";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
@@ -8,10 +7,6 @@ import InstructorCard from "../../shared/InstructorCard/InstructorCard";
 
 const PopularInstructors = () => {
    const { data: instructors, isLoading } = useQuery("instructors", fetchInstructors);
-
-   useEffect(() => {
-      console.log(instructors?.slice(0, 6));
-   }, [instructors]);
 
    if (isLoading) {
       return <div>Loading...</div>;

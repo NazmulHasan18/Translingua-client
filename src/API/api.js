@@ -5,6 +5,8 @@ const api = axios.create({
    baseURL: "http://localhost:5000",
 });
 
+const token = localStorage.getItem("jwt-token");
+
 export const fetchQuotes = async () => {
    const res = await api.get("/quotes");
    return res.data;
@@ -27,9 +29,14 @@ export const fetchPopularClasses = async () => {
    const res = await api.get("/popular_classes");
    return res.data;
 };
+
 export const fetchUser = async (email) => {
-   const res = await api.get(`/user/${email}`);
-   return res.data;
+   if (email) {
+      const res = await api.get(`/user/${email}`, {
+         headers: { authorization: `'userBearer ${token}` },
+      });
+      return res.data;
+   }
 };
 
 export const createUser = async (userData) => {
@@ -43,7 +50,13 @@ export const createUser = async (userData) => {
 };
 
 export const addClass = async (id, email) => {
-   api.post(`/booked_class/${id}?email=${email}`)
+   api.post(
+      `/booked_class/${id}?email=${email}`,
+      {},
+      {
+         headers: { authorization: `'classBearer ${token}` },
+      }
+   )
       .then(function (response) {
          console.log(response);
          if (response?.data?.insertedId) {

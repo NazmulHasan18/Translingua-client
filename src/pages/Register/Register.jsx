@@ -41,17 +41,17 @@ const Register = () => {
                         role: "user",
                      };
                      createUser(userData);
+                     navigate(from);
                      Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${loggedUser.displayName} Register Successful`,
+                        title: `${loggedUser?.displayName} Register Successful`,
                         showConfirmButton: false,
                         timer: 1000,
                      });
-
-                     navigate(from);
                   })
                   .catch((error) => {
+                     console.log(error);
                      toast.error(error.message);
                   });
             }
