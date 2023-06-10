@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
+import { createUser } from "../../API/api";
 
 const Register = () => {
    const { emailPassSignUp, updateUser } = useAuth();
@@ -25,12 +26,21 @@ const Register = () => {
          errors.confirm_password = true;
          return;
       }
-      emailPassSignUp(data.email, data.password)
+      emailPassSignUp(data.email, data.password, data.number)
          .then((userCredential) => {
             const loggedUser = userCredential.user;
             if (loggedUser) {
                updateUser(data.name, data.user_image)
                   .then(() => {
+                     const userData = {
+                        name: data.name,
+                        email: data.email,
+                        number: data.number,
+                        gender: data.gender,
+                        user_image: data.user_image,
+                        role: "user",
+                     };
+                     createUser(userData);
                      Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -38,6 +48,7 @@ const Register = () => {
                         showConfirmButton: false,
                         timer: 1000,
                      });
+
                      navigate(from);
                   })
                   .catch((error) => {

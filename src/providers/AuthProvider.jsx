@@ -40,10 +40,11 @@ const AuthProvider = ({ children }) => {
    };
 
    //    update user
-   const updateUser = (name, photoUrl) => {
+   const updateUser = (name, photoUrl, number) => {
       return updateProfile(auth.currentUser, {
          displayName: name,
          photoURL: photoUrl,
+         phoneNumber: number,
       });
    };
 
@@ -64,13 +65,13 @@ const AuthProvider = ({ children }) => {
    useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
          setUser(loggedUser);
+         console.log(loggedUser);
          if (loggedUser) {
             axios
                .post("http://localhost:5000/jwt", {
                   email: loggedUser.email,
                })
                .then((response) => {
-                  console.log(response.data);
                   localStorage.setItem("jwt-token", response.data);
                });
          } else {

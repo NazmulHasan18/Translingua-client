@@ -1,40 +1,62 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import cardBg1 from "../../../assets/Animated Shape.svg";
-import cardBg2 from "../../../assets/Animated Shape (1).svg";
+import { addClass } from "../../../API/api";
+import useAuth from "../../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
 
-const ClassCard = ({ classs, index }) => {
-   const { class_name, teacher, current_students, total_seats, image, _id } = classs;
+const ClassCard = ({ classs }) => {
+   const { user, loading } = useAuth();
+   const { class_name, teacher, current_students, total_seats, image, _id, status, price, duration } = classs;
+
+   const handelAddClass = () => {
+      if (loading) {
+         return <div>Loading...</div>;
+      }
+      if (!user) {
+         return <Navigate to="/login" replace={true}></Navigate>;
+      }
+      addClass(_id, user?.email);
+   };
 
    return (
-      <div data-aos={`${index % 2 === 0 ? "fade-right" : "fade-left"}`} data-aos-duration="1500">
+      <div>
          <motion.div whileHover={{ scale: 1.1 }}>
-            <div
-               className="hero rounded-lg h-96"
-               style={{ backgroundImage: `url("${index % 2 === 0 ? cardBg1 : cardBg2}")` }}
-            >
-               <div
-                  className={`${
-                     index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                  } hero-content flex-col justify-between w-full`}
-               >
-                  <img src={image} className="max-w-[330px] rounded-lg shadow-2xl" />
-                  <div className={`${index % 2 === 0 && "text-end"} space-y-4 my-5`}>
-                     <h1 className="text-4xl text-white font-bold">{class_name}</h1>
-                     <h2 className="text-2xl font-bold">
-                        Teacher: <span className="text-white">{teacher.name}</span>
-                     </h2>
+            <div className="card lg:card-side bg-orange-500 lg:bg-gradient-to-r from-orange-400 to-orange-700 shadow-xl">
+               <figure className="lg:w-1/2 lg:ml-4">
+                  <img src={image} alt="Album" />
+               </figure>
+               <div className="card-body">
+                  <h1 className="text-4xl font-extrabold">{class_name}</h1>
+                  <h2 className="text-2xl font-bold">
+                     Teacher: <span className="">{teacher.name}</span>
+                  </h2>
 
-                     <p className="text-xl font-semibold">Current Student: {current_students}</p>
-                     <p className="text-xl font-semibold">
-                        Available Seats: {total_seats - current_students}
+                  <p className="font-bold">
+                     Current Student: <span className="font-semibold">{current_students}</span>
+                  </p>
+                  <div className="flex gap-4">
+                     <p className="font-semibold">
+                        Price: <span className="">$ {price}</span>
                      </p>
+                     <p className="font-semibold">
+                        Duration: <span className="">{duration} Month</span>
+                     </p>
+                  </div>
 
-                     <Link to={`/instructor/${_id}`}>
-                        <button className="btn bg-orange-600 hover:bg-orange-400 text-white hover:border-none">
-                           Details &gt;
+                  <p className="font-semibold">Available Seats: {total_seats - current_students}</p>
+
+                  <div className="flex justify-end">
+                     {status !== "approved" || total_seats - current_students <= 0 ? (
+                        <button className="btn btn-disabled my-5 bg-red-600 hover:bg-orange-400 text-white border-white hover:border-none">
+                           Add To Class &gt;
                         </button>
-                     </Link>
+                     ) : (
+                        <button
+                           onClick={handelAddClass}
+                           className="btn bg-orange-600 my-5 hover:bg-orange-400  hover:border-none text-white"
+                        >
+                           Add To Class &gt;
+                        </button>
+                     )}
                   </div>
                </div>
             </div>

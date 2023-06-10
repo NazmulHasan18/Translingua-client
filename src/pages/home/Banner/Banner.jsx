@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 
 import { Pagination } from "swiper";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
    return (
@@ -22,9 +23,11 @@ const Banner = () => {
                      alt=""
                      className="w-[1550px]"
                   />
-                  <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
-                     Enroll Now!
-                  </button>
+                  <Link to="/classes">
+                     <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
+                        Enroll Now!
+                     </button>
+                  </Link>
                </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -34,9 +37,11 @@ const Banner = () => {
                      alt=""
                      className="w-[1550px]"
                   />
-                  <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
-                     Enroll Now!
-                  </button>
+                  <Link to="/classes">
+                     <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
+                        Enroll Now!
+                     </button>
+                  </Link>
                </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -46,9 +51,11 @@ const Banner = () => {
                      alt=""
                      className="w-[1550px]"
                   />
-                  <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
-                     Enroll Now!
-                  </button>
+                  <Link to="/classes">
+                     <button className="btn btn-outline text-orange-600 btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold absolute bottom-8 left-8 md:bottom-[20%] md:left-24">
+                        Enroll Now!
+                     </button>
+                  </Link>
                </div>
             </SwiperSlide>
          </Swiper>

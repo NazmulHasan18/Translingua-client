@@ -7,11 +7,15 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import useUser from "../../../hooks/useUser";
 
 const Navbar = () => {
    const { user, logOut } = useAuth();
    const [toggle, setToggle] = useState(false);
    const [setting, setSetting] = useState(false);
+
+   const loggedUser = useUser(user?.email);
+   const role = loggedUser?.role;
 
    const handelLogOut = () => {
       logOut()
@@ -49,7 +53,12 @@ const Navbar = () => {
          {user ? (
             <>
                <li>
-                  <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-yellow-400" : "")}>
+                  <NavLink
+                     to={`/dashboard/${
+                        role === "user" ? "my_classes" : role === "instructor" ? "my_classes" : "my_classes"
+                     }`}
+                     className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
+                  >
                      Dashboard
                   </NavLink>
                </li>
@@ -128,7 +137,7 @@ const Navbar = () => {
                   </label>
                   <ul
                      tabIndex={1}
-                     className={`menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ${
+                     className={`menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-50 ${
                         !toggle && "hidden"
                      }`}
                   >

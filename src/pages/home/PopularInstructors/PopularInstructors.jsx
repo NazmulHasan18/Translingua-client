@@ -24,7 +24,7 @@ const PopularInstructors = () => {
             subTitle="Unlock Fluent Proficiency with Our Esteemed Language Learning Instructors"
          />
 
-         <div className="grid gap-8 grid-cols-1 lg:grid-cols-3">
+         <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 w-11/12 mx-auto">
             {instructors.slice(0, 6).map((instructor, index) => (
                <InstructorCard instructor={instructor} index={index} key={instructor._id}></InstructorCard>
             ))}

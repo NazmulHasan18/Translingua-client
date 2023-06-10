@@ -4,7 +4,6 @@ import moment from "moment/moment";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchQuotes } from "../../../API/api";
-import { Fade } from "react-awesome-reveal";
 import PopularInstructors from "../PopularInstructors/PopularInstructors";
 import PopularClasses from "../PopularClasses/PopularClasses";
 
@@ -39,11 +38,6 @@ const Home = () => {
          </div>
          <PopularClasses></PopularClasses>
          <PopularInstructors></PopularInstructors>
-         <h2 className="font-exo text-4xl uppercase font-bold" id="title">
-            <Fade delay={100} cascade>
-               I am an animated text
-            </Fade>
-         </h2>
       </div>
    );
 };
