@@ -8,6 +8,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Route";
 import AuthProvider from "./providers/AuthProvider";
 import { ToastContainer } from "react-toastify";
+import "aos/dist/aos.css";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 

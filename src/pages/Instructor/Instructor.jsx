@@ -15,13 +15,10 @@ const Instructor = () => {
    return (
       <div className="">
          <div className="min-h-screen flex justify-between flex-col px-32 lg:flex-row items-center bg-orange-500 mb-28 gap-10">
-            <img
-               className="lg:w-1/2"
-               src="https://i.ibb.co/7XxhLwj/P3-OLGJ1-copy-1.png"
-               alt="instructor image"
-            />
-
-            <div className="bg-orange-300 w-1/2 min-h-[400px] p-10 space-y-5">
+            <div className="lg:w-1/2 z-30" data-aos="zoom-out-right">
+               <img src="https://i.ibb.co/7XxhLwj/P3-OLGJ1-copy-1.png" alt="instructor image" />
+            </div>
+            <div className="bg-orange-300 w-1/2 min-h-[400px] p-10 space-y-5" data-aos="zoom-out-left">
                <Fade cascade damping={0.6}>
                   <h2 className="text-4xl font-semibold">
                      <Fade cascade damping={0.2}>
@@ -30,17 +27,20 @@ const Instructor = () => {
                   </h2>
                   <p>{bio}</p>
                   <p>
-                     Language Taught: <span>{languages_taught[0]}</span>
+                     <span className="font-semibold"> Language Taught: </span>
+                     {languages_taught[0]}
                   </p>
                   <p>
-                     Teaching Experience: <span>{teaching_experience}</span>
+                     <span className="font-semibold">Teaching Experience: </span> {teaching_experience} years
                   </p>
                   <p>
-                     Teaching Methodology: <br />
-                     <span>{teaching_methodology}</span>
+                     <span className="font-semibold">Teaching Methodology:</span>
+                     <br />
+                     {teaching_methodology}
                   </p>
                   <p>
-                     Education: <br /> <span>{education}</span>
+                     <span className="font-semibold">Education: </span> <br />
+                     {education}
                   </p>
                </Fade>
             </div>
