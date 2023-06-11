@@ -33,7 +33,7 @@ export const fetchPopularClasses = async () => {
 export const fetchUser = async (email) => {
    if (email) {
       const res = await api.get(`/user/${email}`, {
-         headers: { authorization: `'userBearer ${token}` },
+         headers: { authorization: `Bearer ${token}` },
       });
       return res.data;
    }
@@ -54,7 +54,7 @@ export const addClass = async (id, email) => {
       `/selected_class/${id}?email=${email}`,
       {},
       {
-         headers: { authorization: `'classBearer ${token}` },
+         headers: { authorization: `Bearer ${token}` },
       }
    )
       .then(function (response) {
@@ -76,18 +76,45 @@ export const addClass = async (id, email) => {
 
 export const getClasses = async (email) => {
    const res = await api.get(`/selected_classes?email=${email}`, {
-      headers: { authorization: `'classBearer ${token}` },
+      headers: { authorization: `Bearer ${token}` },
    });
    return res.data;
 };
 export const deleteClass = async (id, email, refetch) => {
    const res = await api.delete(`/selected_class/${id}?email=${email}`, {
-      headers: { authorization: `'classBearer ${token}` },
+      headers: { authorization: `Bearer ${token}` },
    });
    if (res.data.deletedCount >= 1) {
       refetch();
       Swal.fire("Deleted!", "Your class has been deleted.", "success");
    }
    console.log(res.data);
+   return res.data;
+};
+
+export const postClass = async (data, email) => {
+   api.post(`/add_class?email=${email}`, data, {
+      headers: { authorization: `Bearer ${token}` },
+   })
+      .then(function (response) {
+         console.log(response);
+         if (response?.data?.insertedId) {
+            Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: `Class Added Successful`,
+               showConfirmButton: false,
+               timer: 1000,
+            });
+         }
+      })
+      .catch(function (error) {
+         console.log(error);
+      });
+};
+export const instructorClasses = async (email) => {
+   const res = await api.get(`/instructor_classes/${email}`, {
+      headers: { authorization: `Bearer ${token}` },
+   });
    return res.data;
 };

@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../hooks/useAuth";
+import { postClass } from "../../../../API/api.js";
 
 const AddAClass = () => {
    const { user } = useAuth();
+
    const {
       register,
       handleSubmit,
@@ -13,12 +15,14 @@ const AddAClass = () => {
          class_name: data.class_name,
          image: data.image,
          teacher: { name: data.name, email: data.email },
-         current_student: 0,
+         current_students: 0,
          total_seats: parseInt(data.total_seats),
-         status: "Pending",
+         status: "pending",
          price: parseFloat(data.price),
          duration: parseFloat(data.duration),
       };
+
+      postClass(classs, data.email);
       console.log(classs);
    };
 
