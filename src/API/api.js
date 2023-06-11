@@ -86,13 +86,7 @@ export const deleteClass = async (id, email, refetch) => {
    });
    if (res.data.deletedCount >= 1) {
       refetch();
-      Swal.fire({
-         position: "top-end",
-         icon: "success",
-         title: `Deleted Successful`,
-         showConfirmButton: false,
-         timer: 1000,
-      });
+      Swal.fire("Deleted!", "Your class has been deleted.", "success");
    }
    console.log(res.data);
    return res.data;

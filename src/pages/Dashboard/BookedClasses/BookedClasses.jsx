@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import useAuth from "../../../hooks/useAuth";
 import { deleteClass, getClasses } from "../../../API/api";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
+import Swal from "sweetalert2";
 
 const BookedClasses = () => {
    const { user } = useAuth();
@@ -16,6 +17,8 @@ const BookedClasses = () => {
    }
 
    const totalPrice = classes.reduce((accumulator, currentClass) => accumulator + currentClass.price, 0);
+
+   //    TODO: Implement payment methods
 
    return (
       <div className="mb-24">
@@ -72,7 +75,19 @@ const BookedClasses = () => {
                            <button
                               className="btn btn-xs btn-error ml-4"
                               onClick={() => {
-                                 deleteClass(classs._id, user?.email, refetch);
+                                 Swal.fire({
+                                    title: "Are you sure?",
+                                    text: "You won't be able to revert this!",
+                                    icon: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#3085d6",
+                                    cancelButtonColor: "#d33",
+                                    confirmButtonText: "Yes, delete it!",
+                                 }).then((result) => {
+                                    if (result.isConfirmed) {
+                                       deleteClass(classs._id, user?.email, refetch);
+                                    }
+                                 });
                               }}
                            >
                               Cancel

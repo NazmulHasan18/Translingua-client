@@ -55,7 +55,11 @@ const Navbar = () => {
                <li>
                   <NavLink
                      to={`/dashboard/${
-                        role === "user" ? "my_classes" : role === "instructor" ? "my_classes" : "my_classes"
+                        role === "user"
+                           ? "my_classes"
+                           : role === "instructor"
+                           ? "instructor_classes"
+                           : "my_classes"
                      }`}
                      className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
                   >

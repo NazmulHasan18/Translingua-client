@@ -1,15 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
+import { fetchUser } from "../../../API/api";
+import { useQuery } from "react-query";
 import useAuth from "../../../hooks/useAuth";
-import useUser from "../../../hooks/useUser";
+// import useUser from "../../../hooks/useUser";
 
 const DashboardNavbar = () => {
-   const { user, loading } = useAuth();
+   const { user } = useAuth();
+   const { data: loggedUser, isLoading } = useQuery(["/user"], () => fetchUser(user?.email));
 
-   const loggedUser = useUser(user?.email);
-   if (loading) {
-      return;
+   if (isLoading) {
+      return <div>Loading</div>;
    }
 
+   // const loggedUser = useUser();
+   // console.log(loggedUser);
    const role = loggedUser?.role;
 
    const navLink = (
@@ -44,27 +48,36 @@ const DashboardNavbar = () => {
          ) : role === "instructor" ? (
             <>
                <li>
-                  <a>Item 1</a>
+                  <NavLink
+                     to="/dashboard/instructor_classes"
+                     className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
+                  >
+                     My Classes
+                  </NavLink>
                </li>
                <li>
-                  <a>Parent</a>
-               </li>
-               <li>
-                  <a>Item 3</a>
+                  <NavLink
+                     to="/dashboard/add_class"
+                     className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
+                  >
+                     Add A Class
+                  </NavLink>
                </li>
             </>
          ) : (
-            <>
-               <li>
-                  <a>Item 1</a>
-               </li>
-               <li>
-                  <a>Parent</a>
-               </li>
-               <li>
-                  <a>Item 3</a>
-               </li>
-            </>
+            role === "admin" && (
+               <>
+                  <li>
+                     <a>Item 1</a>
+                  </li>
+                  <li>
+                     <a>Parent</a>
+                  </li>
+                  <li>
+                     <a>Item 3</a>
+                  </li>
+               </>
+            )
          )}
       </>
    );
