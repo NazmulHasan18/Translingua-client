@@ -8,6 +8,7 @@ import Instructor from "../pages/Instructor/Instructor";
 import Classes from "../pages/Classes/Classes";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import MyClasses from "../pages/Dashboard/MyClasses/MyClasses";
+import BookedClasses from "../pages/Dashboard/BookedClasses/BookedClasses";
 
 export const router = createBrowserRouter([
    {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
          {
             path: "my_classes",
             element: <MyClasses></MyClasses>,
+         },
+         {
+            path: "selected_classes",
+            element: <BookedClasses></BookedClasses>,
          },
       ],
    },

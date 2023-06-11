@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useUser from "../../../hooks/useUser";
 
@@ -17,13 +17,28 @@ const DashboardNavbar = () => {
          {role === "user" ? (
             <>
                <li>
-                  <a>My Class</a>
+                  <NavLink
+                     to="/dashboard/my_classes"
+                     className={({ isActive }) => (isActive ? "text-yellow-200" : "")}
+                  >
+                     My Classes
+                  </NavLink>
                </li>
                <li>
-                  <a>Booked Class</a>
+                  <NavLink
+                     to="/dashboard/selected_classes"
+                     className={({ isActive }) => (isActive ? "text-yellow-200" : "")}
+                  >
+                     Selected Classes
+                  </NavLink>
                </li>
                <li>
-                  <a>Payment History</a>
+                  <NavLink
+                     to="/dashboard/payment_history"
+                     className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
+                  >
+                     Payment History
+                  </NavLink>
                </li>
             </>
          ) : role === "instructor" ? (

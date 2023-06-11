@@ -51,7 +51,7 @@ export const createUser = async (userData) => {
 
 export const addClass = async (id, email) => {
    api.post(
-      `/booked_class/${id}?email=${email}`,
+      `/selected_class/${id}?email=${email}`,
       {},
       {
          headers: { authorization: `'classBearer ${token}` },
@@ -72,4 +72,28 @@ export const addClass = async (id, email) => {
       .catch(function (error) {
          console.log(error);
       });
+};
+
+export const getClasses = async (email) => {
+   const res = await api.get(`/selected_classes?email=${email}`, {
+      headers: { authorization: `'classBearer ${token}` },
+   });
+   return res.data;
+};
+export const deleteClass = async (id, email, refetch) => {
+   const res = await api.delete(`/selected_class/${id}?email=${email}`, {
+      headers: { authorization: `'classBearer ${token}` },
+   });
+   if (res.data.deletedCount >= 1) {
+      refetch();
+      Swal.fire({
+         position: "top-end",
+         icon: "success",
+         title: `Deleted Successful`,
+         showConfirmButton: false,
+         timer: 1000,
+      });
+   }
+   console.log(res.data);
+   return res.data;
 };
