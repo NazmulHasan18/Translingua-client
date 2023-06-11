@@ -15,7 +15,7 @@ const Instructors = () => {
       <div>
          <PageCover title="Instructors" subTitle="All Your Instructors Are In Single Page"></PageCover>
          <SectionTitle title="All Instructors" subTitle="Don't Trim Your Dream Let It Grow"></SectionTitle>
-         <div className="grid gap-5 grid-cols-2 mb-24">
+         <div className="grid gap-5 grid-cols-1 lg:grid-cols-3 mb-24">
             {instructors.map((instructor, index) => (
                <InstructorCard instructor={instructor} index={index} key={instructor._id}></InstructorCard>
             ))}

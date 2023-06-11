@@ -5,13 +5,11 @@ import useUser from "../../../hooks/useUser";
 const DashboardNavbar = () => {
    const { user, loading } = useAuth();
 
-   const loggedUser = useUser();
+   const loggedUser = useUser(user?.email);
    if (loading) {
       return;
    }
-   if (user) {
-      loggedUser(user.email);
-   }
+
    const role = loggedUser?.role;
 
    const navLink = (
@@ -92,8 +90,8 @@ const DashboardNavbar = () => {
             <Link to="/">Home</Link>
             <Link to="/classes">Classes</Link>
             <Link to="/Instructors">Instructors</Link>
-            <Link>
-               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <Link to="/profile">
+               <label title={loggedUser?.name} tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
                      <img src={loggedUser?.user_image} />
                   </div>
