@@ -18,7 +18,7 @@ const customStyles = {
    },
 };
 
-Modal.setAppElement("#root"); // Set the root element for accessibility
+Modal.setAppElement("#root");
 
 const ResetModal = ({ isOpen, closeModal }) => {
    const { resetPassword } = useAuth();
@@ -48,7 +48,7 @@ const ResetModal = ({ isOpen, closeModal }) => {
          <h2 className="text-xl mt-3">Enter your email:</h2>
          <form onSubmit={handleSubmit(onSubmit)}>
             <input
-               className="input input-bordered rounded-full my-5"
+               className="input input-bordered lg:w-full rounded-full my-5"
                type="email"
                {...register("email", { required: true })}
             />

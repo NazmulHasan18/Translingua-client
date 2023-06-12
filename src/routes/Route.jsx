@@ -19,6 +19,7 @@ import AdminRoute from "../privateRoutes/AdminRoute/AdminRoute";
 import ManageUsers from "../pages/Dashboard/admins/ManageUsers/ManageUsers";
 import Error from "../pages/home/Error/Error";
 import ManageClasses from "../pages/Dashboard/admins/MangeClasses/ManageClasses";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
    {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
                   <PaymentHistory></PaymentHistory>
                </UserRoute>
             ),
+         },
+         {
+            path: "payment",
+            element: <Payment></Payment>,
          },
          // instructors dashboard
          {

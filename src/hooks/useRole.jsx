@@ -7,7 +7,7 @@ const useRole = () => {
    const token = localStorage.getItem("jwt-token");
    const { data: loggedUser, isLoading: roleLoading } = useQuery(["role", user?.email], async () => {
       const res = await axios.get(`http://localhost:5000/user/${user?.email}`, {
-         headers: { authorization: `Barer ${token}` },
+         headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;
    });

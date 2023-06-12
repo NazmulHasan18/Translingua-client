@@ -9,7 +9,7 @@ export const api = axios.create({
 
 export const apiInstance = axios.create({
    baseURL: "http://localhost:5000",
-   headers: { authorization: `Barer ${token}` },
+   headers: { Authorization: `Bearer ${token}` },
 });
 
 export const fetchQuotes = async () => {
@@ -38,14 +38,14 @@ export const fetchPopularClasses = async () => {
 export const fetchUser = async (email) => {
    if (email) {
       const res = await api.get(`/user/${email}`, {
-         headers: { authorization: `Bearer ${token}` },
+         headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;
    }
 };
 export const fetchUsers = async (email) => {
    const res = await api.get(`/users?email=${email}`, {
-      headers: { authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
    });
    return res.data;
 };
@@ -65,7 +65,7 @@ export const addClass = async (id, email) => {
       `/selected_class/${id}?email=${email}`,
       {},
       {
-         headers: { authorization: `Bearer ${token}` },
+         headers: { Authorization: `Bearer ${token}` },
       }
    )
       .then(function (response) {
@@ -87,13 +87,13 @@ export const addClass = async (id, email) => {
 
 export const getClasses = async (email) => {
    const res = await api.get(`/selected_classes?email=${email}`, {
-      headers: { authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
    });
    return res.data;
 };
 export const deleteClass = async (id, email, refetch) => {
    const res = await api.delete(`/selected_class/${id}?email=${email}`, {
-      headers: { authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
    });
    if (res.data.deletedCount >= 1) {
       refetch();
@@ -105,7 +105,7 @@ export const deleteClass = async (id, email, refetch) => {
 
 export const instructorClasses = async (email) => {
    const res = await api.get(`/instructor_classes/${email}`, {
-      headers: { authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
    });
    return res.data;
 };

@@ -27,7 +27,7 @@ const AddAClass = () => {
 
       axios
          .post(`http://localhost:5000/add_class?email=${user?.email}`, classs, {
-            headers: { authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` },
          })
          .then(function (response) {
             if (response?.data?.insertedId) {

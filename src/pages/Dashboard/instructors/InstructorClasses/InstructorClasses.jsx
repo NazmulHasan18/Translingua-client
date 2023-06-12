@@ -29,7 +29,7 @@ const InstructorClasses = () => {
                   <tr>
                      <th>#</th>
                      <th>Class Name</th>
-                     <th>Class Name</th>
+                     <th>Current Student</th>
                      <th>Feedback</th>
                      <th className="text-end">Price</th>
                      <th>Status</th>

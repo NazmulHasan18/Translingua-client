@@ -11,7 +11,7 @@ const useInstructorClasses = () => {
       refetch: refetchClasses,
    } = useQuery(["classes", user?.email], async () => {
       const res = await axios.get(`http://localhost:5000/instructor_classes/${user?.email}`, {
-         headers: { authorization: `Bearer ${token}` },
+         headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;
    });

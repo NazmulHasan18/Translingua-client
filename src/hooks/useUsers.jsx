@@ -11,7 +11,7 @@ const useUsers = () => {
       refetch: refetchUsers,
    } = useQuery(["users", user?.email], async () => {
       const res = await axios.get(`http://localhost:5000/users?email=${user?.email}`, {
-         headers: { authorization: `Barer ${token}` },
+         headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;
    });
