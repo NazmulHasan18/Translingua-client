@@ -59,10 +59,7 @@ const BookedClasses = () => {
                Total Price:
                <span className="font-bold"> ${totalPrice}</span>
             </p>
-            <Link
-               to="/dashboard/payment"
-               state={{ price: totalPrice, ids: classes.map((classs) => classs._id) }}
-            >
+            <Link to="/dashboard/payment" state={{ price: totalPrice, classes: classes }}>
                <button className="btn btn-warning mb-4"> Pay All</button>
             </Link>
          </div>
@@ -107,7 +104,7 @@ const BookedClasses = () => {
                            </span>
                         </td>
                         <th>
-                           <Link to="/dashboard/payment" state={{ price: classs.price, ids: [classs._id] }}>
+                           <Link to="/dashboard/payment" state={{ price: classs.price, classes: [classs] }}>
                               <button className="btn btn-xs btn-warning">Pay Now</button>
                            </Link>
                            <button

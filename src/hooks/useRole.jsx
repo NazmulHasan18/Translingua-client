@@ -6,7 +6,7 @@ const useRole = () => {
    const { user } = useAuth();
    const token = localStorage.getItem("jwt-token");
    const { data: loggedUser, isLoading: roleLoading } = useQuery(["role", user?.email], async () => {
-      const res = await axios.get(`http://localhost:5000/user/${user?.email}`, {
+      const res = await axios.get(`https://translingua-server-nazmulhasan18.vercel.app/user/${user?.email}`, {
          headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;

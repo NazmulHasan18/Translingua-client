@@ -26,7 +26,7 @@ const AddAClass = () => {
       };
 
       axios
-         .post(`http://localhost:5000/add_class?email=${user?.email}`, classs, {
+         .post(`https://translingua-server-nazmulhasan18.vercel.app/add_class?email=${user?.email}`, classs, {
             headers: { Authorization: `Bearer ${token}` },
          })
          .then(function (response) {

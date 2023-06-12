@@ -95,7 +95,7 @@ const Register = () => {
                               </span>
                            </label>
                            <input
-                              type="text"
+                              type="email"
                               placeholder="Your Email"
                               className="input-warning input input-bordered rounded-full"
                               {...register("email", { required: true })}

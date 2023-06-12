@@ -10,8 +10,8 @@ const Payment = () => {
    const location = useLocation();
    const price = location.state.price;
    const amount = parseFloat(price.toFixed(2));
-   const ids = location.state.ids;
-   console.log(location, amount, ids);
+   const classes = location.state.classes;
+   console.log(location, amount, classes);
    return (
       <div>
          <SectionTitle title="Payment" subTitle="Complete Payment to enroll the class"></SectionTitle>
@@ -19,7 +19,7 @@ const Payment = () => {
             <p>Pay: ${amount}</p>
          </div>
          <Elements stripe={stripePromise}>
-            <CheckoutForm price={amount} ids={ids} />
+            <CheckoutForm price={amount} classes={classes} />
          </Elements>
       </div>
    );

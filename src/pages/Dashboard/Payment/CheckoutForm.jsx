@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { apiInstance } from "../../../API/api";
 import { useNavigate } from "react-router-dom";
 
-const CheckoutForm = ({ price, ids }) => {
+const CheckoutForm = ({ price, classes }) => {
    const { user } = useAuth();
    const token = localStorage.getItem("jwt-token");
    const [error, setError] = useState("");
@@ -13,13 +13,13 @@ const CheckoutForm = ({ price, ids }) => {
    const elements = useElements();
    const [clientSecret, setClientSecret] = useState("");
    const [processing, setProcessing] = useState(false);
-   const [txId, setTxId] = useState("");
+
    const navigate = useNavigate();
 
-   console.log(JSON.stringify({ price, ids }));
+   console.log(JSON.stringify({ price, classes }));
 
    useEffect(() => {
-      fetch("http://localhost:5000/create-payment-intent", {
+      fetch("https://translingua-server-nazmulhasan18.vercel.app/create-payment-intent", {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
@@ -73,14 +73,15 @@ const CheckoutForm = ({ price, ids }) => {
       setProcessing(false);
       if (paymentIntent.status === "succeeded") {
          toast.success("Your Payment Successful!");
-         setTxId(paymentIntent.id);
+
          const payInfo = {
             user: {
                name: user?.displayName,
                email: user?.email,
             },
-            TransactionId: txId,
-            ids: ids,
+            price: price,
+            TransactionId: paymentIntent.id,
+            classes: classes,
          };
 
          apiInstance
@@ -89,19 +90,28 @@ const CheckoutForm = ({ price, ids }) => {
                console.log(res.data);
                if (res.data.insertedId) {
                   apiInstance
-                     .post("/students_classes", { ids, student_email: user?.email })
+                     .patch("/classes", { classes })
                      .then((res) => {
                         console.log(res.data);
-                        if (ids.length === 1) {
-                           apiInstance.delete(`/classes?id=${ids[0]}`).then((res) => {
+                     })
+                     .catch((err) => {
+                        console.log(err);
+                     });
+
+                  apiInstance
+                     .post("/students_classes", { classes, student_email: user?.email })
+                     .then((res) => {
+                        console.log(res.data);
+                        if (classes.length === 1) {
+                           apiInstance.delete(`/classes?id=${classes[0]._id}`).then((res) => {
                               console.log(res.data);
-                              navigate("/dashboard/my_classes");
                            });
-                        } else if (ids.length > 1) {
+                        } else if (classes.length > 1) {
                            apiInstance.delete(`/classes?email=${user.email}`).then((res) => {
                               console.log(res.data);
                            });
                         }
+                        navigate("/dashboard/my_classes");
                      })
                      .catch((err) => {
                         console.log(err);

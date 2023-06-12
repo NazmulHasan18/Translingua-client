@@ -10,9 +10,12 @@ const useInstructorClasses = () => {
       isLoading: loadingClasses,
       refetch: refetchClasses,
    } = useQuery(["classes", user?.email], async () => {
-      const res = await axios.get(`http://localhost:5000/instructor_classes/${user?.email}`, {
-         headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+         `https://translingua-server-nazmulhasan18.vercel.app/instructor_classes/${user?.email}`,
+         {
+            headers: { Authorization: `Bearer ${token}` },
+         }
+      );
       return res.data;
    });
    return { classes, loadingClasses, refetchClasses };

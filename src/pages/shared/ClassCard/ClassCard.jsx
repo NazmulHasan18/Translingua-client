@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { addClass } from "../../../API/api";
 import useAuth from "../../../hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const ClassCard = ({ classs }) => {
    const { user, loading } = useAuth();
@@ -60,13 +60,19 @@ const ClassCard = ({ classs }) => {
                         <button className="btn btn-disabled my-5 bg-red-600 hover:bg-orange-400 text-white border-white hover:border-none">
                            Add To Class &gt;
                         </button>
-                     ) : (
+                     ) : user ? (
                         <button
                            onClick={handelAddClass}
                            className="btn bg-orange-600 my-5 hover:bg-orange-400  hover:border-none text-white"
                         >
                            Add To Class &gt;
                         </button>
+                     ) : (
+                        <Link to="/login">
+                           <button className="btn bg-orange-600 my-5 hover:bg-orange-400  hover:border-none text-white">
+                              Add To Class &gt;
+                           </button>
+                        </Link>
                      )}
                   </div>
                </div>
