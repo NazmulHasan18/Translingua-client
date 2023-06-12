@@ -1,21 +1,19 @@
 import { useQuery } from "react-query";
 import useAuth from "./useAuth";
-import axios from "axios";
+import { apiInstance } from "../API/api";
 
-const useInstructorClasses = () => {
+const useSelectedClasses = () => {
    const { user } = useAuth();
-   const token = localStorage.getItem("jwt-token");
    const {
       data: classes,
       isLoading: loadingClasses,
       refetch: refetchClasses,
    } = useQuery(["classes", user?.email], async () => {
-      const res = await axios.get(`http://localhost:5000/instructor_classes/${user?.email}`, {
-         headers: { authorization: `Bearer ${token}` },
-      });
+      const res = await apiInstance.get(`/selected_classes?email=${user?.email}`);
+      console.log(res.data);
       return res.data;
    });
    return { classes, loadingClasses, refetchClasses };
 };
 
-export default useInstructorClasses;
+export default useSelectedClasses;

@@ -1,18 +1,15 @@
-import { useQuery } from "react-query";
 import useAuth from "../../../hooks/useAuth";
-import { deleteClass, getClasses } from "../../../API/api";
+import { deleteClass } from "../../../API/api";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
+import useSelectedClasses from "../../../hooks/useSelectedClasses";
 
 const BookedClasses = () => {
    const { user } = useAuth();
 
-   const {
-      data: classes,
-      isLoading,
-      refetch,
-   } = useQuery(["selected_classes", user?.email], () => getClasses(user?.email));
-   if (isLoading || !classes) {
+   const { classes, loadingClasses, refetchClasses } = useSelectedClasses();
+
+   if (loadingClasses || !classes) {
       return <div> Loading...</div>;
    }
 
@@ -85,7 +82,7 @@ const BookedClasses = () => {
                                     confirmButtonText: "Yes, delete it!",
                                  }).then((result) => {
                                     if (result.isConfirmed) {
-                                       deleteClass(classs._id, user?.email, refetch);
+                                       deleteClass(classs._id, user?.email, refetchClasses);
                                     }
                                  });
                               }}
