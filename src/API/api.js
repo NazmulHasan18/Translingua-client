@@ -26,27 +26,9 @@ export const fetchInstructorById = async (id) => {
    const res = await api.get(`/instructor/${id}`);
    return res.data;
 };
-export const fetchClasses = async () => {
-   const res = await api.get("/classes");
-   return res.data;
-};
+
 export const fetchPopularClasses = async () => {
    const res = await api.get("/popular_classes");
-   return res.data;
-};
-
-export const fetchUser = async (email) => {
-   if (email) {
-      const res = await api.get(`/user/${email}`, {
-         headers: { Authorization: `Bearer ${token}` },
-      });
-      return res.data;
-   }
-};
-export const fetchUsers = async (email) => {
-   const res = await api.get(`/users?email=${email}`, {
-      headers: { Authorization: `Bearer ${token}` },
-   });
    return res.data;
 };
 
@@ -85,34 +67,6 @@ export const addClass = async (id, email) => {
       });
 };
 
-export const getClasses = async (email) => {
-   const res = await api.get(`/selected_classes?email=${email}`, {
-      headers: { Authorization: `Bearer ${token}` },
-   });
-   return res.data;
-};
-export const deleteClass = async (id, email, refetch) => {
-   const res = await api.delete(`/selected_class/${id}?email=${email}`, {
-      headers: { Authorization: `Bearer ${token}` },
-   });
-   if (res.data.deletedCount >= 1) {
-      refetch();
-      Swal.fire("Deleted!", "Your class has been deleted.", "success");
-   }
-   console.log(res.data);
-   return res.data;
-};
-
-export const instructorClasses = async (email) => {
-   const res = await api.get(`/instructor_classes/${email}`, {
-      headers: { Authorization: `Bearer ${token}` },
-   });
-   return res.data;
-};
-export const singleInstructorClasses = async (email) => {
-   const res = await api.get(`/single_instructor_classes/${email}`);
-   return res.data;
-};
 export const getReviews = async () => {
    const res = await api.get("/reviews");
    return res.data;

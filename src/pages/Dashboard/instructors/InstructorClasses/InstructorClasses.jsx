@@ -2,7 +2,6 @@ import SectionTitle from "../../../shared/SectionTitle/SectionTitle";
 import useInstructorClasses from "../../../../hooks/useInstructorClasses";
 
 const InstructorClasses = () => {
-   // const { data: classes, isLoading } = useQuery("classes", () => instructorClasses(user?.email));
    const { classes, loadingClasses } = useInstructorClasses();
    if (loadingClasses) {
       return (
