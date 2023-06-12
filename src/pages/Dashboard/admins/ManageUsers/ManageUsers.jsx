@@ -1,16 +1,30 @@
-import { useQuery } from "react-query";
 import useAuth from "../../../../hooks/useAuth";
-import { fetchUsers } from "../../../../API/api";
 import axios from "axios";
 import SectionTitle from "../../../shared/SectionTitle/SectionTitle";
+import useUsers from "../../../../hooks/useUsers";
 
 const ManageUsers = () => {
    const { user: loggedUser } = useAuth();
-   const { data: users, refetch } = useQuery(["users", loggedUser?.email], () =>
-      fetchUsers(loggedUser?.email)
-   );
+   const { users, refetchUsers, loadingUsers } = useUsers();
+
+   console.log(users);
 
    const token = localStorage.getItem("jwt-token");
+
+   if (loadingUsers) {
+      return (
+         <>
+            <span className="loading-lg loading loading-spinner text-primary"></span>
+            <span className="loading-lg loading loading-spinner text-secondary"></span>
+            <span className="loading-lg loading loading-spinner text-accent"></span>
+            <span className="loading-lg loading loading-spinner text-neutral"></span>
+            <span className="loading-lg loading loading-spinner text-info"></span>
+            <span className="loading-lg loading loading-spinner text-success"></span>
+            <span className="loading-lg loading loading-spinner text-warning"></span>
+            <span className="loading-lg loading loading-spinner text-error"></span>
+         </>
+      );
+   }
 
    const handelMakeInstructor = async (id) => {
       const res = await axios.patch(
@@ -20,7 +34,7 @@ const ManageUsers = () => {
             headers: { authorization: `Bearer ${token}` },
          }
       );
-      refetch();
+      refetchUsers();
 
       console.log(res.data);
    };
@@ -40,7 +54,7 @@ const ManageUsers = () => {
                   </tr>
                </thead>
                <tbody>
-                  {users?.map((user, index) => (
+                  {users.map((user, index) => (
                      <tr key={user._id}>
                         <td>{index + 1}</td>
                         <td>

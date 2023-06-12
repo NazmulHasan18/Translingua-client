@@ -39,12 +39,10 @@ export const fetchUser = async (email) => {
    }
 };
 export const fetchUsers = async (email) => {
-   if (email) {
-      const res = await api.get(`/users?email=${email}`, {
-         headers: { authorization: `Bearer ${token}` },
-      });
-      return res.data;
-   }
+   const res = await api.get(`/users?email=${email}`, {
+      headers: { authorization: `Bearer ${token}` },
+   });
+   return res.data;
 };
 
 export const createUser = async (userData) => {
