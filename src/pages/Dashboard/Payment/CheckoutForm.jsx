@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { apiInstance } from "../../../API/api";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, ids }) => {
    const { user } = useAuth();
@@ -13,6 +14,7 @@ const CheckoutForm = ({ price, ids }) => {
    const [clientSecret, setClientSecret] = useState("");
    const [processing, setProcessing] = useState(false);
    const [txId, setTxId] = useState("");
+   const navigate = useNavigate();
 
    console.log(JSON.stringify({ price, ids }));
 
@@ -80,20 +82,30 @@ const CheckoutForm = ({ price, ids }) => {
             TransactionId: txId,
             ids: ids,
          };
+
          apiInstance
             .post("/payments", { payInfo })
             .then((res) => {
                console.log(res.data);
                if (res.data.insertedId) {
-                  if (ids.length === 1) {
-                     apiInstance.delete(`/classes?id=${ids[0]}`).then((res) => {
+                  apiInstance
+                     .post("/students_classes", { ids, student_email: user?.email })
+                     .then((res) => {
                         console.log(res.data);
+                        if (ids.length === 1) {
+                           apiInstance.delete(`/classes?id=${ids[0]}`).then((res) => {
+                              console.log(res.data);
+                              navigate("/dashboard/my_classes");
+                           });
+                        } else if (ids.length > 1) {
+                           apiInstance.delete(`/classes?email=${user.email}`).then((res) => {
+                              console.log(res.data);
+                           });
+                        }
+                     })
+                     .catch((err) => {
+                        console.log(err);
                      });
-                  } else if (ids.length > 1) {
-                     apiInstance.delete(`/classes?email=${user.email}`).then((res) => {
-                        console.log(res.data);
-                     });
-                  }
                }
             })
             .catch((err) => {
