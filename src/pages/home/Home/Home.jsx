@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { fetchQuotes } from "../../../API/api";
 import PopularInstructors from "../PopularInstructors/PopularInstructors";
 import PopularClasses from "../PopularClasses/PopularClasses";
+import Reviews from "../Reviews/Reviews";
 
 const Home = () => {
    const [time, setTime] = useState();
@@ -49,6 +50,7 @@ const Home = () => {
          </div>
          <PopularClasses></PopularClasses>
          <PopularInstructors></PopularInstructors>
+         <Reviews></Reviews>
       </div>
    );
 };

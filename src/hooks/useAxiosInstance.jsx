@@ -6,7 +6,7 @@ const useAxiosInstance = () => {
    const { logOut } = useAuth();
    const [axiosInstance, setAxiosInstance] = useState(null);
 
-   const API_BASE_URL = "http://localhost:5000";
+   const API_BASE_URL = "https://translingua-server.vercel.app";
 
    const instance = axios.create({
       baseURL: API_BASE_URL,

@@ -88,19 +88,40 @@ const Navbar = () => {
             </li>
          )}
 
-         {/* <li tabIndex={0}>
-            <details>
-               <summary>Parent</summary>
-               <ul className="p-2">
+         <li tabIndex={0}>
+            <details className="dropdown dropdown-end">
+               <summary className="btn btn-ghost text-xl" onClick={() => setSetting(!setting)}>
+                  <AiFillSetting className={`${setting && "rotate-45"}`}></AiFillSetting>
+               </summary>
+               <ul className="p-2 shadow menu dropdown-content bg-white text-black rounded-box w-52">
                   <li>
-                     <a>Submenu 1</a>
+                     <label>
+                        {/* !TODO: Theme is not working */}
+                        <Toggle
+                           data-toggle-theme="dark,light"
+                           data-act-class="ACTIVECLASS"
+                           defaultChecked={true}
+                           icons={{
+                              checked: <FaSun />,
+                              unchecked: <FaMoon />,
+                           }}
+                        />
+                        <span>Theme</span>
+                     </label>
                   </li>
-                  <li>
-                     <a>Submenu 2</a>
-                  </li>
+                  {user && (
+                     <li>
+                        <button
+                           className="btn btn-sm text-white bg-[#ffb038] hover:bg-[#ffbe5d] rounded-full"
+                           onClick={handelLogOut}
+                        >
+                           Log Out
+                        </button>
+                     </li>
+                  )}
                </ul>
             </details>
-         </li> */}
+         </li>
       </>
    );
 
@@ -152,40 +173,6 @@ const Navbar = () => {
             </div>
             <div className="navbar-end hidden lg:flex">
                <ul className="menu menu-horizontal px-1 items-center">{navs}</ul>
-            </div>
-            <div>
-               <details className="dropdown dropdown-end">
-                  <summary className="btn btn-ghost text-xl" onClick={() => setSetting(!setting)}>
-                     <AiFillSetting className={`${setting && "rotate-45"}`}></AiFillSetting>
-                  </summary>
-                  <ul className="p-2 shadow menu dropdown-content bg-white text-black rounded-box w-52">
-                     <li>
-                        <label>
-                           {/* !TODO: Theme is not working */}
-                           <Toggle
-                              data-toggle-theme="dark,light"
-                              data-act-class="ACTIVECLASS"
-                              defaultChecked={true}
-                              icons={{
-                                 checked: <FaSun />,
-                                 unchecked: <FaMoon />,
-                              }}
-                           />
-                           <span>Theme</span>
-                        </label>
-                     </li>
-                     {user && (
-                        <li>
-                           <button
-                              className="btn btn-sm text-white bg-[#ffb038] hover:bg-[#ffbe5d] rounded-full"
-                              onClick={handelLogOut}
-                           >
-                              Log Out
-                           </button>
-                        </li>
-                     )}
-                  </ul>
-               </details>
             </div>
          </div>
       </div>

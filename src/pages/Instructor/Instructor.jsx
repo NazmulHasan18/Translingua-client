@@ -20,7 +20,7 @@ const Instructor = () => {
    const { data: instructor, isLoading } = useQuery("instructor", () => fetchInstructorById(id));
 
    useEffect(() => {
-      axios(`http://localhost:5000/single_instructor_classes/${instructor?.email}`)
+      axios(`https://translingua-server.vercel.app/single_instructor_classes/${instructor?.email}`)
          .then(function (response) {
             // handle success
             setClasses(response.data);

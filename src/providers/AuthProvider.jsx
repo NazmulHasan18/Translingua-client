@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
          console.log(loggedUser);
          if (loggedUser) {
             axios
-               .post("http://localhost:5000/jwt", {
+               .post("https://translingua-server.vercel.app/jwt", {
                   email: loggedUser.email,
                })
                .then((response) => {
