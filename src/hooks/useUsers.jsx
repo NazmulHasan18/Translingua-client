@@ -13,7 +13,6 @@ const useUsers = () => {
       const res = await axios.get(`http://localhost:5000/users?email=${user?.email}`, {
          headers: { authorization: `Barer ${token}` },
       });
-      console.log(res.data);
       return res.data;
    });
    return { users, loadingUsers, refetchUsers };

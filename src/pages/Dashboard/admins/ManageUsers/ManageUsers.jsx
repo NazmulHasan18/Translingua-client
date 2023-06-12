@@ -1,15 +1,12 @@
 import useAuth from "../../../../hooks/useAuth";
-import axios from "axios";
 import SectionTitle from "../../../shared/SectionTitle/SectionTitle";
 import useUsers from "../../../../hooks/useUsers";
+import Swal from "sweetalert2";
+import { apiInstance } from "../../../../API/api";
 
 const ManageUsers = () => {
    const { user: loggedUser } = useAuth();
    const { users, refetchUsers, loadingUsers } = useUsers();
-
-   console.log(users);
-
-   const token = localStorage.getItem("jwt-token");
 
    if (loadingUsers) {
       return (
@@ -26,17 +23,24 @@ const ManageUsers = () => {
       );
    }
 
-   const handelMakeInstructor = async (id) => {
-      const res = await axios.patch(
-         `http://localhost:5000/user/${id}?email=${loggedUser?.email}`,
-         { role: "instructor" },
-         {
-            headers: { authorization: `Bearer ${token}` },
+   const handelUserRole = async (id, role) => {
+      Swal.fire({
+         title: "Are you sure?",
+         text: `Do you want to update user role?`,
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, Update!",
+      }).then(async (result) => {
+         if (result.isConfirmed) {
+            const res = await apiInstance.patch(`/user/${id}?email=${loggedUser?.email}`, { role: role });
+            refetchUsers();
+            if (res.data.modifiedCount > 0) {
+               Swal.fire("Role Updated!", `User is promoted now`, "success");
+            }
          }
-      );
-      refetchUsers();
-
-      console.log(res.data);
+      });
    };
 
    return (
@@ -73,10 +77,21 @@ const ManageUsers = () => {
                         <td className="uppercase">{user.role}</td>
 
                         <td>
-                           <button className="btn btn-error btn-xs">Make Admin</button>
                            <button
-                              className="btn btn-warning ml-3 btn-xs"
-                              onClick={() => handelMakeInstructor(user._id)}
+                              onClick={() => handelUserRole(user._id, "admin")}
+                              className={`${
+                                 user.role === "admin" && "btn-disabled bg-opacity-40"
+                              } btn btn-error btn-xs`}
+                           >
+                              Make Admin
+                           </button>
+                           <button
+                              className={`${
+                                 user.role === "admin" || user.role === "instructor"
+                                    ? "btn-disabled bg-opacity-40"
+                                    : ""
+                              } btn btn-warning btn-xs ml-3`}
+                              onClick={() => handelUserRole(user._id, "instructor")}
                            >
                               Make Instructor
                            </button>

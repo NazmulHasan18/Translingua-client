@@ -1,12 +1,12 @@
-import { useQuery } from "react-query";
 import PageCover from "../shared/PageCover/PageCover";
-import { fetchClasses } from "../../API/api";
 import ClassCard from "../shared/ClassCard/ClassCard";
 import SectionTitle from "../shared/SectionTitle/SectionTitle";
+import useAllClasses from "../../hooks/useAllClasses";
 
 const Classes = () => {
-   const { data: classes, isLoading } = useQuery("classes", fetchClasses);
-   if (isLoading) {
+   const { classes, loadingClasses } = useAllClasses();
+
+   if (loadingClasses) {
       return (
          <>
             <span className="loading-lg loading loading-spinner text-primary"></span>
