@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../hooks/useAuth";
-import { postClass } from "../../../../API/api.js";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddAClass = () => {
    const { user } = useAuth();
+
+   const token = localStorage.getItem("jwt-token");
 
    const {
       register,
@@ -22,8 +25,24 @@ const AddAClass = () => {
          duration: parseFloat(data.duration),
       };
 
-      postClass(classs, data.email);
-      console.log(classs);
+      axios
+         .post(`http://localhost:5000/add_class?email=${user?.email}`, classs, {
+            headers: { authorization: `Bearer ${token}` },
+         })
+         .then(function (response) {
+            if (response?.data?.insertedId) {
+               Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: `Class Added Successful`,
+                  showConfirmButton: false,
+                  timer: 1000,
+               });
+            }
+         })
+         .catch(function (error) {
+            console.log(error);
+         });
    };
 
    return (

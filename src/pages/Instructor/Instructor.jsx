@@ -13,9 +13,6 @@ import { useState } from "react";
 const Instructor = () => {
    const id = useParams().id;
    const [classes, setClasses] = useState([]);
-   // const { data: classes, isLoading: classLoading } = useQuery("classes", () =>
-   //    instructorClasses(user?.email)
-   // );
 
    const { data: instructor, isLoading } = useQuery("instructor", () => fetchInstructorById(id));
 

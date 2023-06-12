@@ -1,11 +1,16 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const api = axios.create({
+const token = localStorage.getItem("jwt-token");
+
+export const api = axios.create({
    baseURL: "http://localhost:5000",
 });
 
-const token = localStorage.getItem("jwt-token");
+export const apiInstance = axios.create({
+   baseURL: "http://localhost:5000",
+   headers: { authorization: `Barer ${token}` },
+});
 
 export const fetchQuotes = async () => {
    const res = await api.get("/quotes");
@@ -98,26 +103,6 @@ export const deleteClass = async (id, email, refetch) => {
    return res.data;
 };
 
-export const postClass = async (data, email) => {
-   api.post(`/add_class?email=${email}`, data, {
-      headers: { authorization: `Bearer ${token}` },
-   })
-      .then(function (response) {
-         console.log(response);
-         if (response?.data?.insertedId) {
-            Swal.fire({
-               position: "top-end",
-               icon: "success",
-               title: `Class Added Successful`,
-               showConfirmButton: false,
-               timer: 1000,
-            });
-         }
-      })
-      .catch(function (error) {
-         console.log(error);
-      });
-};
 export const instructorClasses = async (email) => {
    const res = await api.get(`/instructor_classes/${email}`, {
       headers: { authorization: `Bearer ${token}` },

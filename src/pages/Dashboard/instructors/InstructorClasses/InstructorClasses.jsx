@@ -1,12 +1,10 @@
-import { useQuery } from "react-query";
-import { instructorClasses } from "../../../../API/api";
-import useAuth from "../../../../hooks/useAuth";
 import SectionTitle from "../../../shared/SectionTitle/SectionTitle";
+import useInstructorClasses from "../../../../hooks/useInstructorClasses";
 
 const InstructorClasses = () => {
-   const { user } = useAuth();
-   const { data: classes, isLoading } = useQuery("classes", () => instructorClasses(user?.email));
-   if (isLoading) {
+   // const { data: classes, isLoading } = useQuery("classes", () => instructorClasses(user?.email));
+   const { classes, loadingClasses } = useInstructorClasses();
+   if (loadingClasses) {
       return (
          <>
             <span className="loading-lg loading loading-spinner text-primary"></span>
