@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import { createUser } from "../../../API/api";
 
 const SocialLogin = () => {
    const { googleLogin } = useAuth();
@@ -16,6 +17,15 @@ const SocialLogin = () => {
       googleLogin()
          .then((result) => {
             const user = result.user;
+            const userData = {
+               name: user.displayName,
+               email: user.email,
+               number: user.number || null,
+               gender: user.gender || null,
+               user_image: user.photoURL,
+               role: "user",
+            };
+            createUser(userData);
             Swal.fire({
                position: "top-end",
                icon: "success",

@@ -13,7 +13,7 @@ const Main = () => {
    }, []);
 
    useEffect(() => {
-      if (location === "/login" || location === "/register") {
+      if (location === "/error") {
          setHide(true);
       } else {
          setHide(false);

@@ -31,7 +31,7 @@ const InstructorCard = ({ instructor, index }) => {
                   <div className="card-actions justify-end">
                      <Link to={`/instructor/${_id}`}>
                         <button className="btn btn-outline border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white hover:border-none">
-                           Details &gt;
+                           See Classes &gt;
                         </button>
                      </Link>
                   </div>

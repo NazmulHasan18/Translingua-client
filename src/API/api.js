@@ -118,3 +118,7 @@ export const instructorClasses = async (email) => {
    });
    return res.data;
 };
+export const singleInstructorClasses = async (email) => {
+   const res = await api.get(`/single_instructor_classes/${email}`);
+   return res.data;
+};

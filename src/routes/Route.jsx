@@ -15,11 +15,15 @@ import InstructorClasses from "../pages/Dashboard/instructors/InstructorClasses/
 import AddAClass from "../pages/Dashboard/instructors/AddAClass/AddAClass";
 import UserRoute from "../privateRoutes/UserRoute/UserRoute";
 import InstructorRoute from "../privateRoutes/InstructorRoute/InstructorRoute";
+import AdminRoute from "../privateRoutes/AdminRoute/AdminRoute";
+import ManageUsers from "../pages/Dashboard/admins/ManageUsers/ManageUsers";
+import Error from "../pages/home/Error/Error";
 
 export const router = createBrowserRouter([
    {
       path: "/",
       element: <Main></Main>,
+      errorElement: <Error></Error>,
       children: [
          {
             path: "/",
@@ -55,6 +59,7 @@ export const router = createBrowserRouter([
          </PrivateRoute>
       ),
       children: [
+         // users Dashboard
          {
             path: "my_classes",
             element: (
@@ -79,6 +84,7 @@ export const router = createBrowserRouter([
                </UserRoute>
             ),
          },
+         // instructors dashboard
          {
             path: "instructor_classes",
             element: (
@@ -93,6 +99,15 @@ export const router = createBrowserRouter([
                <InstructorRoute>
                   <AddAClass></AddAClass>
                </InstructorRoute>
+            ),
+         },
+         // admin Dashboards
+         {
+            path: "manage_users",
+            element: (
+               <AdminRoute>
+                  <ManageUsers></ManageUsers>
+               </AdminRoute>
             ),
          },
       ],

@@ -59,7 +59,7 @@ const Navbar = () => {
                            ? "my_classes"
                            : role === "instructor"
                            ? "instructor_classes"
-                           : "my_classes"
+                           : "manage_users"
                      }`}
                      className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
                   >

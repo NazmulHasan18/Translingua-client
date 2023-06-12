@@ -79,13 +79,20 @@ const DashboardNavbar = () => {
             role === "admin" && (
                <>
                   <li>
-                     <a>Item 1</a>
+                     <NavLink
+                        to="/dashboard/manage_users"
+                        className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
+                     >
+                        Manage Users
+                     </NavLink>
                   </li>
                   <li>
-                     <a>Parent</a>
-                  </li>
-                  <li>
-                     <a>Item 3</a>
+                     <NavLink
+                        to="/dashboard/manage_classes"
+                        className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
+                     >
+                        Manage Classes
+                     </NavLink>
                   </li>
                </>
             )
