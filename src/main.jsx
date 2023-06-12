@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "aos/dist/aos.css";
 
 import { QueryClient, QueryClientProvider } from "react-query";
+import ThemeProvider from "./providers/ThemeProvider";
 
 const queryClient = new QueryClient();
 
@@ -18,8 +19,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
    <React.StrictMode>
       <QueryClientProvider client={queryClient}>
          <AuthProvider>
-            <RouterProvider router={router} />
-            <ToastContainer />
+            <ThemeProvider>
+               <RouterProvider router={router} />
+               <ToastContainer />
+            </ThemeProvider>
          </AuthProvider>
       </QueryClientProvider>
    </React.StrictMode>

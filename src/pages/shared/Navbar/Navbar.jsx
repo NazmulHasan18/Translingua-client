@@ -8,11 +8,14 @@ import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import useRole from "../../../hooks/useRole";
+import { useContext } from "react";
+import { ThemeContext } from "../../../providers/ThemeProvider";
 
 const Navbar = () => {
    const { user, logOut } = useAuth();
    const [toggle, setToggle] = useState(false);
    const [setting, setSetting] = useState(false);
+   const { toggleTheme } = useContext(ThemeContext);
 
    useEffect(() => {
       themeChange(false);
@@ -101,9 +104,7 @@ const Navbar = () => {
                      <label>
                         {/* !TODO: Theme is not working */}
                         <Toggle
-                           data-toggle-theme="dark,light"
-                           data-act-class="ACTIVECLASS"
-                           defaultChecked={true}
+                           onClick={toggleTheme}
                            icons={{
                               checked: <FaSun />,
                               unchecked: <FaMoon />,

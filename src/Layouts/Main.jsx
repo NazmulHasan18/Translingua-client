@@ -3,10 +3,13 @@ import Navbar from "../pages/shared/Navbar/Navbar";
 import Footer from "../pages/shared/Footer/Footer";
 import { useEffect, useState } from "react";
 import AOS from "aos";
+import { useContext } from "react";
+import { ThemeContext } from "../providers/ThemeProvider";
 
 const Main = () => {
    const location = useLocation().pathname;
    const [hide, setHide] = useState(false);
+   const { theme } = useContext(ThemeContext);
 
    useEffect(() => {
       AOS.init();
@@ -21,7 +24,7 @@ const Main = () => {
    }, [location]);
 
    return (
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto" data-theme={`${theme}`}>
          {hide || <Navbar></Navbar>}
          <Outlet></Outlet>
          {hide || <Footer></Footer>}
