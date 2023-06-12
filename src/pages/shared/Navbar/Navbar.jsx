@@ -7,15 +7,18 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import useUser from "../../../hooks/useUser";
+import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
    const { user, logOut } = useAuth();
    const [toggle, setToggle] = useState(false);
    const [setting, setSetting] = useState(false);
 
-   const loggedUser = useUser(user?.email);
-   const role = loggedUser?.role;
+   useEffect(() => {
+      themeChange(false);
+   }, []);
+
+   const { role } = useRole();
 
    const handelLogOut = () => {
       logOut()
@@ -124,10 +127,6 @@ const Navbar = () => {
          </li>
       </>
    );
-
-   useEffect(() => {
-      themeChange(false);
-   }, []);
 
    return (
       <div>

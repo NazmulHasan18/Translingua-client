@@ -1,11 +1,12 @@
-import { useQuery } from "react-query";
 import useAuth from "../../hooks/useAuth";
-import { fetchUser } from "../../API/api";
 import { Navigate } from "react-router-dom";
+import useRole from "../../hooks/useRole";
 
 const InstructorRoute = ({ children }) => {
    const { user, loading } = useAuth();
-   const { data: loggedUser, isLoading } = useQuery(["/user"], () => fetchUser(user?.email));
+
+   const { role, roleLoading } = useRole();
+
    if (loading) {
       return (
          <>
@@ -21,7 +22,7 @@ const InstructorRoute = ({ children }) => {
       );
    }
 
-   if (isLoading) {
+   if (roleLoading) {
       return (
          <>
             <span className="loading-lg loading loading-spinner text-primary"></span>
@@ -35,8 +36,6 @@ const InstructorRoute = ({ children }) => {
          </>
       );
    }
-
-   const role = loggedUser?.role;
 
    if (user && role === "instructor") {
       return children;

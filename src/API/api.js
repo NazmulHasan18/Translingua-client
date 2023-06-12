@@ -2,7 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const api = axios.create({
-   baseURL: "https://translingua-server.vercel.app",
+   baseURL: "http://localhost:5000",
 });
 
 const token = localStorage.getItem("jwt-token");
@@ -33,6 +33,14 @@ export const fetchPopularClasses = async () => {
 export const fetchUser = async (email) => {
    if (email) {
       const res = await api.get(`/user/${email}`, {
+         headers: { authorization: `Bearer ${token}` },
+      });
+      return res.data;
+   }
+};
+export const fetchUsers = async (email) => {
+   if (email) {
+      const res = await api.get(`/users?email=${email}`, {
          headers: { authorization: `Bearer ${token}` },
       });
       return res.data;

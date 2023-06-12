@@ -1,14 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
-import { fetchUser } from "../../../API/api";
-import { useQuery } from "react-query";
 import useAuth from "../../../hooks/useAuth";
-// import useUser from "../../../hooks/useUser";
+import useRole from "../../../hooks/useRole";
 
 const DashboardNavbar = () => {
    const { user } = useAuth();
-   const { data: loggedUser, isLoading } = useQuery(["/user"], () => fetchUser(user?.email));
 
-   if (isLoading) {
+   const { role, roleLoading } = useRole();
+
+   if (roleLoading) {
       return (
          <>
             <span className="loading-lg loading loading-spinner text-primary"></span>
@@ -22,10 +21,6 @@ const DashboardNavbar = () => {
          </>
       );
    }
-
-   // const loggedUser = useUser();
-   // console.log(loggedUser);
-   const role = loggedUser?.role;
 
    const navLink = (
       <>
@@ -137,9 +132,9 @@ const DashboardNavbar = () => {
             <Link to="/classes">Classes</Link>
             <Link to="/Instructors">Instructors</Link>
             <Link to="/profile">
-               <label title={loggedUser?.name} tabIndex={0} className="btn btn-ghost btn-circle avatar">
+               <label title={user?.displayName} tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                     <img src={loggedUser?.user_image} />
+                     <img src={user?.photoURL} />
                   </div>
                </label>
             </Link>

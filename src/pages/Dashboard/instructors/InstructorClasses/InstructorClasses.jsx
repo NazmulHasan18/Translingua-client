@@ -21,8 +21,6 @@ const InstructorClasses = () => {
       );
    }
 
-   console.log(classes);
-
    return (
       <div>
          <SectionTitle title="My Added Classes" subTitle="All the class added by me"></SectionTitle>
