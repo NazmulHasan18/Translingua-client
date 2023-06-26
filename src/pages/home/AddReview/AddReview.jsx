@@ -2,20 +2,29 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
-import { apiInstance2 } from "../../../API/api";
+import { apiInstance } from "../../../API/api";
+import Swal from "sweetalert2";
 
 const AddReview = () => {
    const { user } = useAuth();
 
-   const { register, handleSubmit } = useForm();
+   const { register, handleSubmit, reset } = useForm();
 
    const onSubmit = (data) => {
       data.rating = parseInt(data.rating);
       console.log(data);
-      apiInstance2
+      apiInstance
          .post("/review", data)
          .then(function (response) {
             console.log(response);
+            Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: "Your review added successfully.",
+               showConfirmButton: false,
+               timer: 1500,
+            });
+            reset();
          })
          .catch(function (error) {
             console.log(error);
