@@ -32,10 +32,10 @@ const AddReview = () => {
    };
 
    return (
-      <div className="container mx-auto mb-24">
+      <div className="container mx-auto mb-24" data-aos="zoom-in" data-aos-duration="4000">
          <SectionTitle title="Add Review" subTitle="Your Comment Is So Expensive to Us"></SectionTitle>
          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-7">
+            <div className="grid mx-6 lg:mx-auto lg:grid-cols-2  gap-7">
                <div className="form-control w-full">
                   <label className="label">
                      <span className="label-text">Enter your name.</span>

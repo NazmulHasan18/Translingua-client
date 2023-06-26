@@ -2,7 +2,11 @@ import { FaBookReader, FaLaptop, FaPlayCircle, FaUsers } from "react-icons/fa";
 
 const Info1 = () => {
    return (
-      <div className="container mx-auto grid grid-cols-4 gap-4">
+      <div
+         className="container my-8 mx-5 lg:mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4"
+         data-aos="zoom-in"
+         data-aos-duration="1500"
+      >
          <div>
             <p className="flex gap-4 items-center text-2xl font-semibold">
                <span className="p-6 text-gray-700 text-3xl bg-gray-200 rounded-full">
