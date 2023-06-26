@@ -8,6 +8,9 @@ import PopularInstructors from "../PopularInstructors/PopularInstructors";
 import PopularClasses from "../PopularClasses/PopularClasses";
 import Reviews from "../Reviews/Reviews";
 import AddReview from "../AddReview/AddReview";
+import Info1 from "../Info1/Info1";
+import JoinUs from "../JoinUs/JoinUs";
+import Different from "../Different/Different";
 
 const Home = () => {
    const [time, setTime] = useState();
@@ -49,8 +52,11 @@ const Home = () => {
                </p>
             </Marquee>
          </div>
+         <Info1></Info1>
          <PopularClasses></PopularClasses>
+         <JoinUs></JoinUs>
          <PopularInstructors></PopularInstructors>
+         <Different></Different>
          <Reviews></Reviews>
          <AddReview></AddReview>
       </div>
