@@ -29,13 +29,13 @@ const ClassCard = ({ classs }) => {
    };
 
    return (
-      <div>
+      <div data-aos="fade-up" data-aos-duration="1500">
          <motion.div whileHover={{ scale: 1.1 }}>
-            <div className="card lg:card-side bg-orange-500 lg:bg-gradient-to-r from-orange-400 to-orange-700 shadow-xl">
-               <figure className="lg:w-1/2 lg:ml-4">
-                  <img src={image} alt="Album" />
+            <div className="card bg-gradient-to-r from-sky-400 to-sky-600 shadow-xl rounded-xl h-[600px]">
+               <figure>
+                  <img src={image} alt="Album" className="rounded-t-xl" />
                </figure>
-               <div className="card-body">
+               <div className="card-body  text-white">
                   <h1 className="text-4xl font-extrabold">{class_name}</h1>
                   <h2 className="text-2xl font-bold">
                      Teacher: <span className="">{teacher.name}</span>
@@ -57,19 +57,19 @@ const ClassCard = ({ classs }) => {
 
                   <div className="flex justify-end">
                      {status !== "approved" || total_seats - current_students <= 0 ? (
-                        <button className="btn btn-disabled my-5 bg-red-600 hover:bg-orange-400 text-white border-white hover:border-none">
+                        <button className="btn btn-disabled my-5 bg-red-600  text-white border-white hover:border-none">
                            Add To Class &gt;
                         </button>
                      ) : user ? (
                         <button
                            onClick={handelAddClass}
-                           className="btn bg-orange-600 my-5 hover:bg-orange-400  hover:border-none text-white"
+                           className="btn bg-blue-900 my-5 hover:bg-blue-700  hover:border-none text-white"
                         >
                            Add To Class &gt;
                         </button>
                      ) : (
                         <Link to="/login">
-                           <button className="btn bg-orange-600 my-5 hover:bg-orange-400  hover:border-none text-white">
+                           <button className="btn bg-blue-900 my-5 hover:bg-blue-700  hover:border-none text-white">
                               Add To Class &gt;
                            </button>
                         </Link>

@@ -6,7 +6,7 @@ const InstructorCard = ({ instructor, index }) => {
    const { name, current_students, _id, languages_taught, teaching_experience } = instructor;
 
    return (
-      <div data-aos={`${index % 2 === 0 ? "fade-right" : "fade-left"}`} data-aos-duration="1500">
+      <div data-aos={`${index % 2 === 0 ? "fade-right" : "fade-left"}`} data-aos-duration="2000">
          <motion.div whileHover={{ scale: 1.1 }}>
             <div className="card mx-auto card-compact max-w-96 bg-orange-50 shadow-xl rounded-none">
                <figure>

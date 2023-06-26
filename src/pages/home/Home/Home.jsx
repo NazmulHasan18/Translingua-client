@@ -7,6 +7,7 @@ import { fetchQuotes } from "../../../API/api";
 import PopularInstructors from "../PopularInstructors/PopularInstructors";
 import PopularClasses from "../PopularClasses/PopularClasses";
 import Reviews from "../Reviews/Reviews";
+import AddReview from "../AddReview/AddReview";
 
 const Home = () => {
    const [time, setTime] = useState();
@@ -37,7 +38,7 @@ const Home = () => {
    return (
       <div>
          <Banner></Banner>
-         <div className="flex lg:text-xl lg:-mt-24 lg:mb-20 font-semibold">
+         <div className="flex lg:text-xl lg:-mt-24 lg:mb-20 font-semibold mx-auto">
             <p className="bg-orange-600 text-white py-1  lg:w-[230px]  px-4 lg:py-4 lg:px-10 z-40">{time}</p>
             <Marquee gradient={true}>
                <p className="shadow-2xl">
@@ -51,6 +52,7 @@ const Home = () => {
          <PopularClasses></PopularClasses>
          <PopularInstructors></PopularInstructors>
          <Reviews></Reviews>
+         <AddReview></AddReview>
       </div>
    );
 };

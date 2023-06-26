@@ -30,15 +30,15 @@ const PopularInstructors = () => {
             subTitle="Unlock Fluent Proficiency with Our Esteemed Language Learning Instructors"
          />
 
-         <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 w-11/12 mx-auto">
+         <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 container mx-auto">
             {instructors.slice(0, 6).map((instructor, index) => (
                <InstructorCard instructor={instructor} index={index} key={instructor._id}></InstructorCard>
             ))}
          </div>
          <div className="text-center my-10">
             <Link to="/instructors">
-               <button className="btn btn-outline text-orange-600 btn-xs md:text-xl sm:btn-sm md:btn-md lg:btn-l btn-warning font-bold md:bottom-[20%] md:left-24">
-                  All Instructors <FaArrowRight className="text-xl"></FaArrowRight>
+               <button className="button">
+                  All Instructors <FaArrowRight className="text-xl inline"></FaArrowRight>
                </button>
             </Link>
          </div>

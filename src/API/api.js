@@ -11,6 +11,10 @@ export const apiInstance = axios.create({
    baseURL: "https://translingua-server-nazmulhasan18.vercel.app",
    headers: { Authorization: `Bearer ${token}` },
 });
+export const apiInstance2 = axios.create({
+   baseURL: "http://localhost:5000",
+   headers: { Authorization: `Bearer ${token}` },
+});
 
 export const fetchQuotes = async () => {
    const res = await api.get("/quotes");

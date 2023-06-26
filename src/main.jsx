@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "react-toggle/style.css";
 import "swiper/css";
 import "./index.css";
+import "./SCSS/Custom.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Route";
