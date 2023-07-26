@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
    return (
-      <div>
+      <div className="max-w-screen-2xl mx-auto">
          <Swiper
             pagination={true}
             modules={[Pagination]}

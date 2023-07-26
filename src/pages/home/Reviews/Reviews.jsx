@@ -24,7 +24,7 @@ const Reviews = () => {
    }
 
    return (
-      <div className="mb-10">
+      <div className="mb-10 max-w-screen-2xl mx-auto">
          <SectionTitle title="Students Reviews" subTitle="What our students says"></SectionTitle>
          <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
             {reviews.map((review) => (

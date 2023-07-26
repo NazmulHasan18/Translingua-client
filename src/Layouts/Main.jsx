@@ -24,7 +24,7 @@ const Main = () => {
    }, [location]);
 
    return (
-      <div className="max-w-screen-2xl mx-auto" data-theme={`${theme}`}>
+      <div data-theme={`${theme}`}>
          {hide || <Navbar></Navbar>}
          <Outlet></Outlet>
          {hide || <Footer></Footer>}
