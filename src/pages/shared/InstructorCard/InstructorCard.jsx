@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
-import instructorImg from "../../../assets/Nazmul Hasan.jpg";
 import { Link } from "react-router-dom";
 
 const InstructorCard = ({ instructor, index }) => {
-   const { name, current_students, _id, languages_taught, teaching_experience } = instructor;
+   const { name, current_students, _id, languages_taught, teaching_experience, profile_picture } = instructor;
 
    return (
       <div data-aos={`${index % 2 === 0 ? "fade-right" : "fade-left"}`} data-aos-duration="2000">
          <motion.div whileHover={{ scale: 1.1 }}>
             <div className="card mx-auto card-compact max-w-96 bg-orange-50 shadow-xl rounded-none">
                <figure>
-                  <img src={instructorImg} alt={name} />
+                  <img src={profile_picture} alt={name} />
                </figure>
                <div className="card-body">
                   <h2 className="card-title">{name}</h2>

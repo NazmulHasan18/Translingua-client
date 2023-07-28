@@ -4,6 +4,8 @@ export default {
    theme: {
       fontFamily: {
          mont: ["Montserrat", "serif-serif"],
+         // font-family: '', serif;
+         jose: ["Josefin Slab", "serif"],
       },
       extend: {},
    },

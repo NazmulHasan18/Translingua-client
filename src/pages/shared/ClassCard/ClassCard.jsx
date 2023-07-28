@@ -31,7 +31,7 @@ const ClassCard = ({ classs }) => {
    return (
       <div data-aos="fade-up" data-aos-duration="1500">
          <motion.div whileHover={{ scale: 1.1 }}>
-            <div className="card bg-gradient-to-r from-sky-400 to-sky-600 shadow-xl rounded-xl h-[600px]">
+            <div className="card bg-gradient-to-r from-sky-400 to-sky-600 shadow-xl rounded-xl w-[350px] lg:w-auto lg:h-[600px]">
                <figure>
                   <img src={image} alt="Album" className="rounded-t-xl" />
                </figure>
@@ -44,7 +44,7 @@ const ClassCard = ({ classs }) => {
                   <p className="font-bold">
                      Current Student: <span className="font-semibold">{current_students}</span>
                   </p>
-                  <div className="flex gap-4">
+                  <div className="lg:flex gap-4">
                      <p className="font-semibold">
                         Price: <span className="">$ {price}</span>
                      </p>

@@ -4,13 +4,13 @@ import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 const JoinUs = () => {
    return (
       <div
-         className="bg-gradient-to-tl from-[#f5ecf7] to-[#c7fffa] pt-1
+         className="bg-gradient-to-tl mx-auto from-[#f5ecf7] to-[#c7fffa] pt-1 overflow-x-hidden
       "
          data-aos="fade-up"
          data-aos-duration="2000"
       >
          <SectionTitle title="Join Us" subTitle="Want to join us! Here how you can do it."></SectionTitle>
-         <div className="container lg:mx-auto my-10 flex justify-between gap-10 items-center mx-5">
+         <div className="container lg:mx-auto my-10 flex justify-between gap-10 items-center px-4">
             <img
                src="https://i.ibb.co/bvJDb7H/nazmul2.png"
                alt=""
@@ -24,11 +24,7 @@ const JoinUs = () => {
                      your selected language. And you can easily communicate in this language.
                   </p>
                </div>
-               <div
-                  className="grid overflow-hidden lg:grid-cols-2 gap-4 mb-6"
-                  data-aos="zoom-out"
-                  data-aos-duration="1500"
-               >
+               <div className="grid lg:grid-cols-2 gap-4 mb-6" data-aos="zoom-out" data-aos-duration="1500">
                   <div className="bg-green-50 p-5 flex gap-4">
                      <p className="p-5 h-16 text-2xl rounded-full bg-green-200 text-green-500">
                         <FaCheckCircle></FaCheckCircle>

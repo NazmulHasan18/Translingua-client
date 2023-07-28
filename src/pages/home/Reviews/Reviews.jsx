@@ -29,7 +29,7 @@ const Reviews = () => {
          <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
             {reviews.map((review) => (
                <SwiperSlide key={review._id}>
-                  <div className="relative text-center">
+                  <div className="relative p-4 lg:p-0 text-center">
                      <img
                         className="hidden lg:block"
                         src="https://i.ibb.co/7Q093hJ/wepik-geometric-positive-customer-review-twitter-post-20230612024601djt8.png"

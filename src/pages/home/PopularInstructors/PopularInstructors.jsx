@@ -24,7 +24,7 @@ const PopularInstructors = () => {
    }
 
    return (
-      <div>
+      <div className="w-[375px] lg:w-auto mx-auto overflow-x-hidden">
          <SectionTitle
             title="Popular Teacher"
             subTitle="Unlock Fluent Proficiency with Our Esteemed Language Learning Instructors"

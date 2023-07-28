@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
    return (
-      <footer className=" text-neutral-content">
+      <footer className="text-neutral-content">
          <div className="flex flex-col lg:flex-row h-full">
             <div className="bg-slate-800 lg:w-full min-h-full p-3 lg:p-10">
                <p className="text-2xl font-bold">Translingua Institute</p>

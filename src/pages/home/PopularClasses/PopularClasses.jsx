@@ -23,12 +23,12 @@ const PopularClasses = () => {
    }
 
    return (
-      <div>
+      <div className="w-[375px] lg:w-auto mx-auto overflow-x-hidden">
          <SectionTitle
             title="Popular Classes"
             subTitle="Student Are Showing More Interest In These Class"
          ></SectionTitle>
-         <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 container mx-10 w-[400px] lg:w-auto lg:mx-auto">
+         <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 container mx-3 w-[400px] lg:w-auto lg:mx-auto">
             {classes.map((classs) => (
                <ClassCard classs={classs} key={classs._id}></ClassCard>
             ))}
