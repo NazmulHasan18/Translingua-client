@@ -9,7 +9,7 @@ const useAllClasses = () => {
       isLoading: loadingClasses,
       refetch: refetchClasses,
    } = useQuery(["classes", user?.email], async () => {
-      const res = await axios.get(`https://translingua-server-nazmulhasan18.vercel.app/classes`);
+      const res = await axios.get(`https://translingua-server.vercel.app/classes`);
       return res.data;
    });
    return { classes, loadingClasses, refetchClasses };

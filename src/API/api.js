@@ -4,11 +4,11 @@ import Swal from "sweetalert2";
 const token = localStorage.getItem("jwt-token");
 
 export const api = axios.create({
-   baseURL: "https://translingua-server-nazmulhasan18.vercel.app",
+   baseURL: "https://translingua-server.vercel.app",
 });
 
 export const apiInstance = axios.create({
-   baseURL: "https://translingua-server-nazmulhasan18.vercel.app",
+   baseURL: "https://translingua-server.vercel.app",
    headers: { Authorization: `Bearer ${token}` },
 });
 export const apiInstance2 = axios.create({

@@ -19,7 +19,7 @@ const CheckoutForm = ({ price, classes }) => {
    console.log(JSON.stringify({ price, classes }));
 
    useEffect(() => {
-      fetch("https://translingua-server-nazmulhasan18.vercel.app/create-payment-intent", {
+      fetch("https://translingua-server.vercel.app/create-payment-intent", {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
