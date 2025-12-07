@@ -20,110 +20,119 @@ import ManageUsers from "../pages/Dashboard/admins/ManageUsers/ManageUsers";
 import Error from "../pages/home/Error/Error";
 import ManageClasses from "../pages/Dashboard/admins/MangeClasses/ManageClasses";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import Profile from "../pages/Profile/Profile";
 
 export const router = createBrowserRouter([
-   {
-      path: "/",
-      element: <Main></Main>,
-      errorElement: <Error></Error>,
-      children: [
-         {
-            path: "/",
-            element: <Home></Home>,
-         },
-         {
-            path: "/login",
-            element: <Login></Login>,
-         },
-         {
-            path: "/register",
-            element: <Register></Register>,
-         },
-         {
-            path: "/instructors",
-            element: <Instructors></Instructors>,
-         },
-         {
-            path: "/classes",
-            element: <Classes></Classes>,
-         },
-         {
-            path: "/instructor/:id",
-            element: <Instructor></Instructor>,
-         },
-      ],
-   },
-   {
-      path: "/dashboard",
-      element: (
-         <PrivateRoute>
-            <Dashboard></Dashboard>
-         </PrivateRoute>
-      ),
-      children: [
-         // users Dashboard
-         {
-            path: "my_classes",
-            element: (
-               <UserRoute>
-                  <MyClasses></MyClasses>
-               </UserRoute>
-            ),
-         },
-         {
-            path: "selected_classes",
-            element: (
-               <UserRoute>
-                  <BookedClasses></BookedClasses>
-               </UserRoute>
-            ),
-         },
-         {
-            path: "payment_history",
-            element: (
-               <UserRoute>
-                  <PaymentHistory></PaymentHistory>
-               </UserRoute>
-            ),
-         },
-         {
-            path: "payment",
-            element: <Payment></Payment>,
-         },
-         // instructors dashboard
-         {
-            path: "instructor_classes",
-            element: (
-               <InstructorRoute>
-                  <InstructorClasses></InstructorClasses>
-               </InstructorRoute>
-            ),
-         },
-         {
-            path: "add_class",
-            element: (
-               <InstructorRoute>
-                  <AddAClass></AddAClass>
-               </InstructorRoute>
-            ),
-         },
-         // admin Dashboards
-         {
-            path: "manage_users",
-            element: (
-               <AdminRoute>
-                  <ManageUsers></ManageUsers>
-               </AdminRoute>
-            ),
-         },
-         {
-            path: "manage_classes",
-            element: (
-               <AdminRoute>
-                  <ManageClasses></ManageClasses>
-               </AdminRoute>
-            ),
-         },
-      ],
-   },
+  {
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/instructors",
+        element: <Instructors></Instructors>,
+      },
+      {
+        path: "/classes",
+        element: <Classes></Classes>,
+      },
+      {
+        path: "/instructor/:id",
+        element: <Instructor></Instructor>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      // users Dashboard
+      {
+        path: "my_classes",
+        element: (
+          <UserRoute>
+            <MyClasses></MyClasses>
+          </UserRoute>
+        ),
+      },
+      {
+        path: "selected_classes",
+        element: (
+          <UserRoute>
+            <BookedClasses></BookedClasses>
+          </UserRoute>
+        ),
+      },
+      {
+        path: "payment_history",
+        element: (
+          <UserRoute>
+            <PaymentHistory></PaymentHistory>
+          </UserRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      // instructors dashboard
+      {
+        path: "instructor_classes",
+        element: (
+          <InstructorRoute>
+            <InstructorClasses></InstructorClasses>
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "add_class",
+        element: (
+          <InstructorRoute>
+            <AddAClass></AddAClass>
+          </InstructorRoute>
+        ),
+      },
+      // admin Dashboards
+      {
+        path: "manage_users",
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage_classes",
+        element: (
+          <AdminRoute>
+            <ManageClasses></ManageClasses>
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
 ]);

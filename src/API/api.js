@@ -1,77 +1,73 @@
 import axios from "axios";
-import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const token = localStorage.getItem("jwt-token");
+// export const baseUrl = "http://localhost:4000/api";
+export const baseUrl = "https://translingua-server2-0.vercel.app/api";
 
 export const api = axios.create({
-   baseURL: "https://translingua-server.vercel.app",
+  baseURL: `${baseUrl}`,
 });
 
 export const apiInstance = axios.create({
-   baseURL: "https://translingua-server.vercel.app",
-   headers: { Authorization: `Bearer ${token}` },
-});
-export const apiInstance2 = axios.create({
-   baseURL: "http://localhost:5000",
-   headers: { Authorization: `Bearer ${token}` },
+  baseURL: `${baseUrl}`,
+  headers: { Authorization: `Bearer ${token}` },
 });
 
 export const fetchQuotes = async () => {
-   const res = await api.get("/quotes");
-   return res.data;
+  const res = await api.get("/classes/quotes");
+  return res.data;
 };
 
 export const fetchInstructors = async () => {
-   const res = await api.get("/instructors");
-   return res.data;
+  const res = await api.get("/instructors");
+  return res.data;
 };
 
 export const fetchInstructorById = async (id) => {
-   const res = await api.get(`/instructor/${id}`);
-   return res.data;
+  const res = await api.get(`/instructors/${id}`);
+  return res.data;
 };
 
 export const fetchPopularClasses = async () => {
-   const res = await api.get("/popular_classes");
-   return res.data;
+  const res = await api.get("/classes/popular");
+  return res.data;
 };
 
 export const createUser = async (userData) => {
-   api.post("/users", userData)
-      .then(function (response) {
-         console.log(response);
-      })
-      .catch(function (error) {
-         console.log(error);
-      });
+  api
+    .post("/users", userData)
+    .then(function (response) {
+      if (response?.data) {
+        toast.success("Class Booked Successful");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
 export const addClass = async (id, email) => {
-   api.post(
-      `/selected_class/${id}?email=${email}`,
+  api
+    .post(
+      `/students/select/${id}?email=${email}`,
       {},
       {
-         headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       }
-   )
-      .then(function (response) {
-         console.log(response);
-         if (response?.data?.insertedId) {
-            Swal.fire({
-               position: "top-end",
-               icon: "success",
-               title: `Class Booked Successful`,
-               showConfirmButton: false,
-               timer: 1000,
-            });
-         }
-      })
-      .catch(function (error) {
-         console.log(error);
-      });
+    )
+    .then(function (response) {
+      console.log(response);
+      if (response?.status === 201) {
+        toast.success("Class Booked Successful");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
 export const getReviews = async () => {
-   const res = await api.get("/reviews");
-   return res.data;
+  const res = await api.get("/reviews");
+  return res.data;
 };
